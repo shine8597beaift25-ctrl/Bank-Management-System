@@ -1,0 +1,115 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: This demo makes REAL transactions: 5 deposits of Rs. 100 and 5 withdrawals of Rs. 50
+on the account you choose (net change: + Rs. 250 if all succeed).
+Account number to use: Continue? (y/n): 
+----------------------------------------------------
+   Producer-Consumer: Concurrent Banking Requests
+----------------------------------------------------
+Account SB1006 starting balance: Rs. 315,250.75
+   [ATM] submitted Request #2 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] submitted Request #1 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-1] processed Request #1 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #2 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] submitted Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [ATM] submitted Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] submitted Request #5 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Queue] Full (3 items). ATM waits...
+   [Queue] Full (3 items). Branch-Counter waits...
+   [ATM] submitted Request #6 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Queue] Full (3 items). Branch-Counter waits...
+   [Branch-Counter] submitted Request #7 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-1] processed Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Queue] Full (3 items). Branch-Counter waits...
+   [Queue] Full (3 items). ATM waits...
+   [Branch-Counter] submitted Request #9 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Queue] Full (3 items). ATM waits...
+   [ATM] submitted Request #8 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-1] processed Request #5 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #6 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] finished submitting 5 requests.
+   [Queue] Full (3 items). ATM waits...
+   [ATM] submitted Request #10 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-1] processed Request #7 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #9 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [ATM] finished submitting 5 requests.
+   [Queue] Full (3 items). main waits...
+   [Consumer-1] processed Request #8 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-2] processed Request #10 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-1] received stop signal. Ending.
+   [Consumer-2] received stop signal. Ending.
+
+Requests processed : 10 successful, 0 refused
+Total deposited    : Rs. 500.00
+Total withdrawn    : Rs. 250.00
+Expected balance   : Rs. 315,500.75
+Balance in database: Rs. 315,500.75
+[SUCCESS] Balances match. No update was lost even with two consumers working at once.
+
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for banking with Java National Bank. Goodbye!

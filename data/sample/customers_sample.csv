@@ -1,0 +1,9 @@
+customer_id,name,age,email,phone,address
+C1001,Aarav Sharma,28,aarav.sharma@example.com,9876543210,"12 MG Road, Bengaluru"
+C1002,Priya Nair,34,priya.nair@example.com,9845012345,"45 Marine Drive, Kochi"
+C1003,Rohan Mehta,41,rohan.mehta@example.com,9123456780,"8 Park Street, Kolkata"
+C1004,Sneha Reddy,25,sneha.reddy@example.com,9988776655,"221 Banjara Hills, Hyderabad"
+C1005,Vikram Singh,52,vikram.singh@example.com,9811122233,"17 Civil Lines, Jaipur"
+C1006,Ananya Iyer,30,ananya.iyer@example.com,9000011111,"3 T Nagar, Chennai"
+C1007,Karan Patel,45,karan.patel@example.com,9727272727,"90 CG Road, Ahmedabad"
+C1008,Fatima Khan,38,fatima.khan@example.com,9654321098,"5 Hazratganj, Lucknow"

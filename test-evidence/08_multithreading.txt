@@ -1,0 +1,211 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+Thread Lifecycle, sleep(), join(), Priority, interrupt()
+----------------------------------------------------
+State before start() : NEW
+Priorities           : Runnable-Worker=10, Thread-Subclass=1 (only a hint to the scheduler)
+   [Runnable-Worker] step 1
+State after start()  : RUNNABLE
+   [Thread-Subclass] countdown 3
+State while sleeping : TIMED_WAITING
+   [Thread-Subclass] countdown 2
+   [Runnable-Worker] step 2
+   [Thread-Subclass] countdown 1
+   [Runnable-Worker] step 3
+State after join()   : TERMINATED
+State waiting for a lock : BLOCKED
+   [Blocked-Demo] finally got the lock
+State after wait()       : WAITING
+   [Waiting-Demo] woken up by notify()
+   [Sleeper] going to sleep for 10 seconds...
+   [Sleeper] interrupted! InterruptedException caught, stopping early.
+[SUCCESS] Lifecycle demo finished: NEW -> RUNNABLE -> TIMED_WAITING / BLOCKED / WAITING -> TERMINATED.
+
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+  Race Condition vs synchronized and AtomicInteger
+----------------------------------------------------
+4 threads each add Rs. 1 to a shared total 100000 times. Expected total = 400000
++----------------------------------+-------------+----------------------------+
+| Approach                         | Final Total | Result                     |
++----------------------------------+-------------+----------------------------+
+| No synchronization (race cond... | 385697      | WRONG (lost 14303 updates) |
+| synchronized method              | 400000      | Correct                    |
+| synchronized block               | 400000      | Correct                    |
+| AtomicInteger (atomic operation) | 400000      | Correct                    |
++----------------------------------+-------------+----------------------------+
+Total records: 4
+The unsafe total is usually LOWER than expected because two threads read the same
+old value and both write back old+1, so one update is lost. The bank's real
+deposit/withdraw/transfer methods are synchronized to prevent exactly this.
+
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+              Visibility with volatile
+----------------------------------------------------
+Main thread sets keepWorking = false
+   [Worker] saw keepWorking = false and stopped.
+[SUCCESS] Worker stopped after 40,512,743 loops. Without 'volatile' the worker might keep a cached copy and never stop.
+
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+    Daemon Thread: Background Report Generation
+----------------------------------------------------
+Main thread waits (wait/notify) until the first report is ready...
+First report is ready. Main thread continues its own work.
+
+ReportThread activity log:
+23:06:03.786  started (daemon=true, priority=1)
+23:06:03.810  report #1 saved to data/reports/background_report.txt
+23:06:04.216  report #2 saved to data/reports/background_report.txt
+23:06:04.621  report #3 saved to data/reports/background_report.txt
+23:06:04.810  interrupted while sleeping - stopping
+[SUCCESS] 3 report(s) generated. Latest saved in data/reports/background_report.txt
+
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: This demo makes REAL transactions: 5 deposits of Rs. 100 and 5 withdrawals of Rs. 50
+on the account you choose (net change: + Rs. 250 if all succeed).
+Account number to use: Continue? (y/n): 
+----------------------------------------------------
+   Producer-Consumer: Concurrent Banking Requests
+----------------------------------------------------
+Account SB1006 starting balance: Rs. 315,000.75
+   [Branch-Counter] submitted Request #1 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [ATM] submitted Request #2 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-1] processed Request #1 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #2 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] submitted Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-1] processed Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [ATM] submitted Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-2] processed Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] submitted Request #5 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-1] processed Request #5 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [ATM] submitted Request #6 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-2] processed Request #6 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] submitted Request #7 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-1] processed Request #7 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Branch-Counter] submitted Request #9 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #9 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [ATM] submitted Request #8 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-1] processed Request #8 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] finished submitting 5 requests.
+   [ATM] submitted Request #10 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-2] processed Request #10 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [ATM] finished submitting 5 requests.
+   [Consumer-1] received stop signal. Ending.
+   [Consumer-2] received stop signal. Ending.
+
+Requests processed : 10 successful, 0 refused
+Total deposited    : Rs. 500.00
+Total withdrawn    : Rs. 250.00
+Expected balance   : Rs. 315,250.75
+Balance in database: Rs. 315,250.75
+[SUCCESS] Balances match. No update was lost even with two consumers working at once.
+
+====================================================
+            MULTITHREADING DEMONSTRATION
+====================================================
+1. Thread Lifecycle, sleep, join, priority, interrupt
+2. Race Condition vs synchronized / Atomic
+3. Visibility with volatile
+4. Daemon Thread: Background Report Generation
+5. Producer-Consumer: Concurrent Banking Requests
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for banking with Java National Bank. Goodbye!

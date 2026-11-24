@@ -1,0 +1,730 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                  All Transactions
+----------------------------------------------------
++----+---------------------+---------+--------------+----------------+---------+----------------------------------+------------------------+
+| ID | Date & Time         | Account | Type         | Amount         | Status  | Description                      | Reference              |
++----+---------------------+---------+--------------+----------------+---------+----------------------------------+------------------------+
+| 1  | 2026-11-20 23:02:41 | SB1001  | Deposit      | Rs. 25,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-001 |
+| 2  | 2026-11-20 23:02:41 | CA1002  | Deposit      | Rs. 150,000.00 | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-002 |
+| 3  | 2026-11-20 23:02:41 | SB1003  | Deposit      | Rs. 48,250.50  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-003 |
+| 4  | 2026-11-20 23:02:41 | SB1004  | Deposit      | Rs. 7,800.00   | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-004 |
+| 5  | 2026-11-20 23:02:41 | CA1005  | Deposit      | Rs. 92,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-005 |
+| 6  | 2026-11-20 23:02:41 | SB1006  | Deposit      | Rs. 315,000.75 | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-006 |
+| 7  | 2026-11-20 23:02:41 | SB1007  | Deposit      | Rs. 1,200.00   | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-007 |
+| 8  | 2026-11-20 23:02:41 | CA1008  | Deposit      | Rs. 64,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-008 |
+| 9  | 2026-11-20 23:05:12 | SB1010  | Deposit      | Rs. 2,000.00   | SUCCESS | Opening deposit                  | OPN-20261120230512-001 |
+| 10 | 2026-11-20 23:05:12 | CA1011  | Deposit      | Rs. 5,000.00   | SUCCESS | Opening deposit                  | OPN-20261120230512-002 |
+| 11 | 2026-11-20 23:05:12 | SB1010  | Deposit      | Rs. 2,500.50   | SUCCESS | Cash deposit                     | DEP-20261120230512-003 |
+| 12 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 10,000.00  | FAILED  | Refused: insufficient balance    | WDL-20261120230512-005 |
+| 13 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 800.00     | SUCCESS | Cash withdrawal                  | WDL-20261120230512-007 |
+| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00   | SUCCESS | Transfer to CA1005               | TRF-20261120230512-008 |
+| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In  | Rs. 5,000.00   | SUCCESS | Transfer from SB1001             | TRF-20261120230512-008 |
+| 16 | 2026-11-20 23:05:12 | SB1007  | Transfer Out | Rs. 5,000.00   | FAILED  | Refused transfer to SB1001: i... | TRF-20261120230512-009 |
++----+---------------------+---------+--------------+----------------+---------+----------------------------------+------------------------+
+Total records: 16
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: Account number: 
+----------------------------------------------------
+       Transactions of SB1001 (Aarav Sharma)
+----------------------------------------------------
++----+---------------------+---------+--------------+---------------+---------+------------------------------+------------------------+
+| ID | Date & Time         | Account | Type         | Amount        | Status  | Description                  | Reference              |
++----+---------------------+---------+--------------+---------------+---------+------------------------------+------------------------+
+| 1  | 2026-11-20 23:02:41 | SB1001  | Deposit      | Rs. 25,000.00 | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-001 |
+| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00  | SUCCESS | Transfer to CA1005           | TRF-20261120230512-008 |
++----+---------------------+---------+--------------+---------------+---------+------------------------------+------------------------+
+Total records: 2
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: Account number (press Enter for all accounts): 
+----------------------------------------------------
+               Deposit - all accounts
+----------------------------------------------------
++----+---------------------+---------+---------+----------------+---------+------------------------------+------------------------+
+| ID | Date & Time         | Account | Type    | Amount         | Status  | Description                  | Reference              |
++----+---------------------+---------+---------+----------------+---------+------------------------------+------------------------+
+| 1  | 2026-11-20 23:02:41 | SB1001  | Deposit | Rs. 25,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-001 |
+| 2  | 2026-11-20 23:02:41 | CA1002  | Deposit | Rs. 150,000.00 | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-002 |
+| 3  | 2026-11-20 23:02:41 | SB1003  | Deposit | Rs. 48,250.50  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-003 |
+| 4  | 2026-11-20 23:02:41 | SB1004  | Deposit | Rs. 7,800.00   | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-004 |
+| 5  | 2026-11-20 23:02:41 | CA1005  | Deposit | Rs. 92,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-005 |
+| 6  | 2026-11-20 23:02:41 | SB1006  | Deposit | Rs. 315,000.75 | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-006 |
+| 7  | 2026-11-20 23:02:41 | SB1007  | Deposit | Rs. 1,200.00   | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-007 |
+| 8  | 2026-11-20 23:02:41 | CA1008  | Deposit | Rs. 64,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-008 |
+| 9  | 2026-11-20 23:05:12 | SB1010  | Deposit | Rs. 2,000.00   | SUCCESS | Opening deposit              | OPN-20261120230512-001 |
+| 10 | 2026-11-20 23:05:12 | CA1011  | Deposit | Rs. 5,000.00   | SUCCESS | Opening deposit              | OPN-20261120230512-002 |
+| 11 | 2026-11-20 23:05:12 | SB1010  | Deposit | Rs. 2,500.50   | SUCCESS | Cash deposit                 | DEP-20261120230512-003 |
++----+---------------------+---------+---------+----------------+---------+------------------------------+------------------------+
+Total records: 11
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: Account number (press Enter for all accounts): 
+----------------------------------------------------
+                Withdrawal - SB1004
+----------------------------------------------------
++----+---------------------+---------+------------+---------------+---------+-------------------------------+------------------------+
+| ID | Date & Time         | Account | Type       | Amount        | Status  | Description                   | Reference              |
++----+---------------------+---------+------------+---------------+---------+-------------------------------+------------------------+
+| 12 | 2026-11-20 23:05:12 | SB1004  | Withdrawal | Rs. 10,000.00 | FAILED  | Refused: insufficient balance | WDL-20261120230512-005 |
+| 13 | 2026-11-20 23:05:12 | SB1004  | Withdrawal | Rs. 800.00    | SUCCESS | Cash withdrawal               | WDL-20261120230512-007 |
++----+---------------------+---------+------------+---------------+---------+-------------------------------+------------------------+
+Total records: 2
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: Account number (press Enter for all accounts): 
+----------------------------------------------------
+             Transfer In - all accounts
+----------------------------------------------------
++----+---------------------+---------+-------------+--------------+---------+----------------------+------------------------+
+| ID | Date & Time         | Account | Type        | Amount       | Status  | Description          | Reference              |
++----+---------------------+---------+-------------+--------------+---------+----------------------+------------------------+
+| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In | Rs. 5,000.00 | SUCCESS | Transfer from SB1001 | TRF-20261120230512-008 |
++----+---------------------+---------+-------------+--------------+---------+----------------------+------------------------+
+Total records: 1
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: Account number (press Enter for all accounts): 
+----------------------------------------------------
+               Transfer Out - SB1001
+----------------------------------------------------
++----+---------------------+---------+--------------+--------------+---------+--------------------+------------------------+
+| ID | Date & Time         | Account | Type         | Amount       | Status  | Description        | Reference              |
++----+---------------------+---------+--------------+--------------+---------+--------------------+------------------------+
+| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00 | SUCCESS | Transfer to CA1005 | TRF-20261120230512-008 |
++----+---------------------+---------+--------------+--------------+---------+--------------------+------------------------+
+Total records: 1
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: How many latest transactions (1-100)? 
+----------------------------------------------------
+        Latest 5 Transactions (newest first)
+----------------------------------------------------
++----+---------------------+---------+--------------+---------------+---------+----------------------------------+------------------------+
+| ID | Date & Time         | Account | Type         | Amount        | Status  | Description                      | Reference              |
++----+---------------------+---------+--------------+---------------+---------+----------------------------------+------------------------+
+| 16 | 2026-11-20 23:05:12 | SB1007  | Transfer Out | Rs. 5,000.00  | FAILED  | Refused transfer to SB1001: i... | TRF-20261120230512-009 |
+| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In  | Rs. 5,000.00  | SUCCESS | Transfer from SB1001             | TRF-20261120230512-008 |
+| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00  | SUCCESS | Transfer to CA1005               | TRF-20261120230512-008 |
+| 13 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 800.00    | SUCCESS | Cash withdrawal                  | WDL-20261120230512-007 |
+| 12 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 10,000.00 | FAILED  | Refused: insufficient balance    | WDL-20261120230512-005 |
++----+---------------------+---------+--------------+---------------+---------+----------------------------------+------------------------+
+Total records: 5
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: Reference ID (e.g. TRF-20261120143005-001): 
+----------------------------------------------------
+ Transactions with reference TRF-20261120230512-008
+----------------------------------------------------
++----+---------------------+---------+--------------+--------------+---------+----------------------+------------------------+
+| ID | Date & Time         | Account | Type         | Amount       | Status  | Description          | Reference              |
++----+---------------------+---------+--------------+--------------+---------+----------------------+------------------------+
+| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00 | SUCCESS | Transfer to CA1005   | TRF-20261120230512-008 |
+| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In  | Rs. 5,000.00 | SUCCESS | Transfer from SB1001 | TRF-20261120230512-008 |
++----+---------------------+---------+--------------+--------------+---------+----------------------+------------------------+
+Total records: 2
+
+====================================================
+                TRANSACTION HISTORY
+====================================================
+1. View All Transactions
+2. View Transactions of an Account
+3. View Deposits
+4. View Withdrawals
+5. View Incoming Transfers
+6. View Outgoing Transfers
+7. View Latest Transactions
+8. View Both Sides of a Transfer (by Reference ID)
+9. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                    Bank Summary
+----------------------------------------------------
+Total registered customers             : 8
+Total accounts (active + closed)       : 11
+Total active accounts                  : 10
+Total savings accounts (active)        : 6
+Total current accounts (active)        : 4
+Total money held in active accounts    : Rs. 711,951.75
+Total deposits                         : Rs. 712,751.75 (11 deposits)
+Total withdrawals                      : Rs. 800.00 (1 withdrawals)
+Total transfers                        : Rs. 5,000.00 (1 transfers)
+Refused (failed) attempts              : 2
+Highest account balance                : Rs. 315,000.75 (SB1006 - Vikram Singh)
+Lowest account balance                 : Rs. 1,200.00 (SB1007 - Ananya Iyer)
+Accounts with at least one transaction : 10
+
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+          Top 5 Account Holders by Balance
+----------------------------------------------------
++------------+-------------+--------------+---------+----------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance        | Status | Opened On  |
++------------+-------------+--------------+---------+----------------+--------+------------+
+| SB1006     | C1005       | Vikram Singh | Savings | Rs. 315,000.75 | ACTIVE | 2026-03-18 |
+| CA1002     | C1001       | Aarav Sharma | Current | Rs. 150,000.00 | ACTIVE | 2026-01-12 |
+| CA1005     | C1004       | Sneha Reddy  | Current | Rs. 97,000.00  | ACTIVE | 2026-03-05 |
+| CA1008     | C1007       | Karan Patel  | Current | Rs. 64,000.00  | ACTIVE | 2026-05-30 |
+| SB1003     | C1002       | Priya Nair   | Savings | Rs. 48,250.50  | ACTIVE | 2026-02-03 |
++------------+-------------+--------------+---------+----------------+--------+------------+
+Total records: 5
+
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+          Customers in Alphabetical Order
+----------------------------------------------------
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| Customer ID | Name         | Age | Email                    | Phone      | Address                      |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| C1001       | Aarav Sharma | 28  | aarav.sharma@example.com | 9876543210 | 12 MG Road, Bengaluru        |
+| C1006       | Ananya Iyer  | 30  | ananya.iyer@example.com  | 9000011111 | 3 T Nagar, Chennai           |
+| C1008       | Fatima Khan  | 38  | fatima.khan@example.com  | 9654321098 | 5 Hazratganj, Lucknow        |
+| C1007       | Karan Patel  | 45  | karan.patel@example.com  | 9727272727 | 90 CG Road, Ahmedabad        |
+| C1002       | Priya Nair   | 34  | priya.nair@example.com   | 9845012345 | 45 Marine Drive, Kochi       |
+| C1003       | Rohan Mehta  | 41  | rohan.mehta@example.com  | 9123456780 | 8 Park Street, Kolkata       |
+| C1004       | Sneha Reddy  | 25  | sneha.reddy@example.com  | 9988776655 | 221 Banjara Hills, Hyderabad |
+| C1005       | Vikram Singh | 52  | vikram.singh@example.com | 9811122233 | 17 Civil Lines, Jaipur       |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+Total records: 8
+
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+     Account Summary by Type (active accounts)
+----------------------------------------------------
++---------+----------+----------------+-----------------+
+| Type    | Accounts | Total Balance  | Average Balance |
++---------+----------+----------------+-----------------+
+| Savings | 6        | Rs. 395,951.75 | Rs. 65,991.96   |
+| Current | 4        | Rs. 316,000.00 | Rs. 79,000.00   |
++---------+----------+----------------+-----------------+
+Total records: 2
+
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+   Transaction Summary by Type (successful only)
+----------------------------------------------------
++--------------+-------+----------------+
+| Type         | Count | Total Amount   |
++--------------+-------+----------------+
+| Deposit      | 11    | Rs. 712,751.75 |
+| Withdrawal   | 1     | Rs. 800.00     |
+| Transfer In  | 1     | Rs. 5,000.00   |
+| Transfer Out | 1     | Rs. 5,000.00   |
++--------------+-------+----------------+
+Total records: 4
+
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+        Accounts - Page 1 of 4 (3 per page)
+----------------------------------------------------
++------------+-------------+--------------+---------+----------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance        | Status | Opened On  |
++------------+-------------+--------------+---------+----------------+--------+------------+
+| CA1002     | C1001       | Aarav Sharma | Current | Rs. 150,000.00 | ACTIVE | 2026-01-12 |
+| CA1005     | C1004       | Sneha Reddy  | Current | Rs. 97,000.00  | ACTIVE | 2026-03-05 |
+| CA1008     | C1007       | Karan Patel  | Current | Rs. 64,000.00  | ACTIVE | 2026-05-30 |
++------------+-------------+--------------+---------+----------------+--------+------------+
+Total records: 3
+[N]ext, [P]revious, [Q]uit: 
+----------------------------------------------------
+        Accounts - Page 2 of 4 (3 per page)
+----------------------------------------------------
++------------+-------------+--------------+---------+---------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance       | Status | Opened On  |
++------------+-------------+--------------+---------+---------------+--------+------------+
+| CA1011     | C1002       | Priya Nair   | Current | Rs. 5,000.00  | ACTIVE | 2026-11-20 |
+| SB1001     | C1001       | Aarav Sharma | Savings | Rs. 20,000.00 | ACTIVE | 2026-01-10 |
+| SB1003     | C1002       | Priya Nair   | Savings | Rs. 48,250.50 | ACTIVE | 2026-02-03 |
++------------+-------------+--------------+---------+---------------+--------+------------+
+Total records: 3
+[N]ext, [P]revious, [Q]uit: 
+----------------------------------------------------
+        Accounts - Page 3 of 4 (3 per page)
+----------------------------------------------------
++------------+-------------+--------------+---------+----------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance        | Status | Opened On  |
++------------+-------------+--------------+---------+----------------+--------+------------+
+| SB1004     | C1003       | Rohan Mehta  | Savings | Rs. 7,000.00   | ACTIVE | 2026-02-20 |
+| SB1006     | C1005       | Vikram Singh | Savings | Rs. 315,000.75 | ACTIVE | 2026-03-18 |
+| SB1007     | C1006       | Ananya Iyer  | Savings | Rs. 1,200.00   | ACTIVE | 2026-04-22 |
++------------+-------------+--------------+---------+----------------+--------+------------+
+Total records: 3
+[N]ext, [P]revious, [Q]uit: 
+----------------------------------------------------
+        Accounts - Page 4 of 4 (3 per page)
+----------------------------------------------------
++------------+-------------+-------------+---------+--------------+--------+------------+
+| Account No | Customer ID | Holder Name | Type    | Balance      | Status | Opened On  |
++------------+-------------+-------------+---------+--------------+--------+------------+
+| SB1009     | C1008       | Fatima Khan | Savings | Rs. 0.00     | CLOSED | 2026-06-14 |
+| SB1010     | C1007       | Karan Patel | Savings | Rs. 4,500.50 | ACTIVE | 2026-11-20 |
++------------+-------------+-------------+---------+--------------+--------+------------+
+Total records: 2
+[N]ext, [P]revious, [Q]uit: [INFO] No more pages in that direction (or unknown command).
+
+----------------------------------------------------
+        Accounts - Page 4 of 4 (3 per page)
+----------------------------------------------------
++------------+-------------+-------------+---------+--------------+--------+------------+
+| Account No | Customer ID | Holder Name | Type    | Balance      | Status | Opened On  |
++------------+-------------+-------------+---------+--------------+--------+------------+
+| SB1009     | C1008       | Fatima Khan | Savings | Rs. 0.00     | CLOSED | 2026-06-14 |
+| SB1010     | C1007       | Karan Patel | Savings | Rs. 4,500.50 | ACTIVE | 2026-11-20 |
++------------+-------------+-------------+---------+--------------+--------+------------+
+Total records: 2
+[N]ext, [P]revious, [Q]uit: 
+----------------------------------------------------
+        Accounts - Page 3 of 4 (3 per page)
+----------------------------------------------------
++------------+-------------+--------------+---------+----------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance        | Status | Opened On  |
++------------+-------------+--------------+---------+----------------+--------+------------+
+| SB1004     | C1003       | Rohan Mehta  | Savings | Rs. 7,000.00   | ACTIVE | 2026-02-20 |
+| SB1006     | C1005       | Vikram Singh | Savings | Rs. 315,000.75 | ACTIVE | 2026-03-18 |
+| SB1007     | C1006       | Ananya Iyer  | Savings | Rs. 1,200.00   | ACTIVE | 2026-04-22 |
++------------+-------------+--------------+---------+----------------+--------+------------+
+Total records: 3
+[N]ext, [P]revious, [Q]uit: 
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: ============================================================
+            Java National Bank - BANKING REPORT
+               Generated: 2026-11-20 23:05:34
+============================================================
+Total registered customers               : 8
+Total accounts (active + closed)         : 11
+Total active accounts                    : 10
+Total savings accounts (active)          : 6
+Total current accounts (active)          : 4
+Total money held in active accounts      : Rs. 711,951.75
+Total deposits                           : Rs. 712,751.75 (11 deposits)
+Total withdrawals                        : Rs. 800.00 (1 withdrawals)
+Total transfers                          : Rs. 5,000.00 (1 transfers)
+Refused (failed) attempts                : 2
+Highest account balance                  : Rs. 315,000.75 (SB1006 - Vikram Singh)
+Lowest account balance                   : Rs. 1,200.00 (SB1007 - Ananya Iyer)
+Accounts with at least one transaction   : 10
+
+TOP 5 ACCOUNT HOLDERS BY BALANCE
+1. SB1006   Vikram Singh              Rs. 315,000.75
+2. CA1002   Aarav Sharma              Rs. 150,000.00
+3. CA1005   Sneha Reddy               Rs. 97,000.00
+4. CA1008   Karan Patel               Rs. 64,000.00
+5. SB1003   Priya Nair                Rs. 48,250.50
+
+CUSTOMERS (ALPHABETICAL)
+- Aarav Sharma              C1001
+- Ananya Iyer               C1006
+- Fatima Khan               C1008
+- Karan Patel               C1007
+- Priya Nair                C1002
+- Rohan Mehta               C1003
+- Sneha Reddy               C1004
+- Vikram Singh              C1005
+
+[SUCCESS] Report saved to data/reports/bank_report_20261120_230534.txt
+
+====================================================
+                  BANKING REPORTS
+====================================================
+1. Bank Summary (all key figures)
+2. Top 5 Account Holders by Balance
+3. Customer List in Alphabetical Order
+4. Account Summary by Type
+5. Transaction Summary by Type
+6. Browse Accounts Page by Page
+7. Save Full Report to a Text File
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+               SORT CUSTOMER RECORDS
+====================================================
+1. Sort by Customer ID (Comparable)
+2. Sort by Name (Comparator)
+3. Sort by Age (Comparator)
+4. Sort by Email (Comparator)
+5. Return to Main Menu
+====================================================
+Enter Your Choice: Descending order? (y/n): 
+----------------------------------------------------
+            Sorted Customers (ascending)
+----------------------------------------------------
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| Customer ID | Name         | Age | Email                    | Phone      | Address                      |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| C1001       | Aarav Sharma | 28  | aarav.sharma@example.com | 9876543210 | 12 MG Road, Bengaluru        |
+| C1002       | Priya Nair   | 34  | priya.nair@example.com   | 9845012345 | 45 Marine Drive, Kochi       |
+| C1003       | Rohan Mehta  | 41  | rohan.mehta@example.com  | 9123456780 | 8 Park Street, Kolkata       |
+| C1004       | Sneha Reddy  | 25  | sneha.reddy@example.com  | 9988776655 | 221 Banjara Hills, Hyderabad |
+| C1005       | Vikram Singh | 52  | vikram.singh@example.com | 9811122233 | 17 Civil Lines, Jaipur       |
+| C1006       | Ananya Iyer  | 30  | ananya.iyer@example.com  | 9000011111 | 3 T Nagar, Chennai           |
+| C1007       | Karan Patel  | 45  | karan.patel@example.com  | 9727272727 | 90 CG Road, Ahmedabad        |
+| C1008       | Fatima Khan  | 38  | fatima.khan@example.com  | 9654321098 | 5 Hazratganj, Lucknow        |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+Total records: 8
+
+====================================================
+               SORT CUSTOMER RECORDS
+====================================================
+1. Sort by Customer ID (Comparable)
+2. Sort by Name (Comparator)
+3. Sort by Age (Comparator)
+4. Sort by Email (Comparator)
+5. Return to Main Menu
+====================================================
+Enter Your Choice: Descending order? (y/n): 
+----------------------------------------------------
+            Sorted Customers (ascending)
+----------------------------------------------------
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| Customer ID | Name         | Age | Email                    | Phone      | Address                      |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| C1001       | Aarav Sharma | 28  | aarav.sharma@example.com | 9876543210 | 12 MG Road, Bengaluru        |
+| C1006       | Ananya Iyer  | 30  | ananya.iyer@example.com  | 9000011111 | 3 T Nagar, Chennai           |
+| C1008       | Fatima Khan  | 38  | fatima.khan@example.com  | 9654321098 | 5 Hazratganj, Lucknow        |
+| C1007       | Karan Patel  | 45  | karan.patel@example.com  | 9727272727 | 90 CG Road, Ahmedabad        |
+| C1002       | Priya Nair   | 34  | priya.nair@example.com   | 9845012345 | 45 Marine Drive, Kochi       |
+| C1003       | Rohan Mehta  | 41  | rohan.mehta@example.com  | 9123456780 | 8 Park Street, Kolkata       |
+| C1004       | Sneha Reddy  | 25  | sneha.reddy@example.com  | 9988776655 | 221 Banjara Hills, Hyderabad |
+| C1005       | Vikram Singh | 52  | vikram.singh@example.com | 9811122233 | 17 Civil Lines, Jaipur       |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+Total records: 8
+
+====================================================
+               SORT CUSTOMER RECORDS
+====================================================
+1. Sort by Customer ID (Comparable)
+2. Sort by Name (Comparator)
+3. Sort by Age (Comparator)
+4. Sort by Email (Comparator)
+5. Return to Main Menu
+====================================================
+Enter Your Choice: Descending order? (y/n): 
+----------------------------------------------------
+           Sorted Customers (descending)
+----------------------------------------------------
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| Customer ID | Name         | Age | Email                    | Phone      | Address                      |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| C1005       | Vikram Singh | 52  | vikram.singh@example.com | 9811122233 | 17 Civil Lines, Jaipur       |
+| C1007       | Karan Patel  | 45  | karan.patel@example.com  | 9727272727 | 90 CG Road, Ahmedabad        |
+| C1003       | Rohan Mehta  | 41  | rohan.mehta@example.com  | 9123456780 | 8 Park Street, Kolkata       |
+| C1008       | Fatima Khan  | 38  | fatima.khan@example.com  | 9654321098 | 5 Hazratganj, Lucknow        |
+| C1002       | Priya Nair   | 34  | priya.nair@example.com   | 9845012345 | 45 Marine Drive, Kochi       |
+| C1006       | Ananya Iyer  | 30  | ananya.iyer@example.com  | 9000011111 | 3 T Nagar, Chennai           |
+| C1001       | Aarav Sharma | 28  | aarav.sharma@example.com | 9876543210 | 12 MG Road, Bengaluru        |
+| C1004       | Sneha Reddy  | 25  | sneha.reddy@example.com  | 9988776655 | 221 Banjara Hills, Hyderabad |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+Total records: 8
+
+====================================================
+               SORT CUSTOMER RECORDS
+====================================================
+1. Sort by Customer ID (Comparable)
+2. Sort by Name (Comparator)
+3. Sort by Age (Comparator)
+4. Sort by Email (Comparator)
+5. Return to Main Menu
+====================================================
+Enter Your Choice: Descending order? (y/n): 
+----------------------------------------------------
+            Sorted Customers (ascending)
+----------------------------------------------------
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| Customer ID | Name         | Age | Email                    | Phone      | Address                      |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| C1001       | Aarav Sharma | 28  | aarav.sharma@example.com | 9876543210 | 12 MG Road, Bengaluru        |
+| C1006       | Ananya Iyer  | 30  | ananya.iyer@example.com  | 9000011111 | 3 T Nagar, Chennai           |
+| C1008       | Fatima Khan  | 38  | fatima.khan@example.com  | 9654321098 | 5 Hazratganj, Lucknow        |
+| C1007       | Karan Patel  | 45  | karan.patel@example.com  | 9727272727 | 90 CG Road, Ahmedabad        |
+| C1002       | Priya Nair   | 34  | priya.nair@example.com   | 9845012345 | 45 Marine Drive, Kochi       |
+| C1003       | Rohan Mehta  | 41  | rohan.mehta@example.com  | 9123456780 | 8 Park Street, Kolkata       |
+| C1004       | Sneha Reddy  | 25  | sneha.reddy@example.com  | 9988776655 | 221 Banjara Hills, Hyderabad |
+| C1005       | Vikram Singh | 52  | vikram.singh@example.com | 9811122233 | 17 Civil Lines, Jaipur       |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+Total records: 8
+
+====================================================
+               SORT CUSTOMER RECORDS
+====================================================
+1. Sort by Customer ID (Comparable)
+2. Sort by Name (Comparator)
+3. Sort by Age (Comparator)
+4. Sort by Email (Comparator)
+5. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for banking with Java National Bank. Goodbye!

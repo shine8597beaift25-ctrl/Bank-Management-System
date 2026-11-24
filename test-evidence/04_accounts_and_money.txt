@@ -1,0 +1,649 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+                CREATE BANK ACCOUNT
+====================================================
+1. Create Savings Account
+2. Create Current Account
+3. Close an Account
+4. Check Account Status
+5. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                Open Savings Account
+----------------------------------------------------
+Rules: minimum opening deposit Rs. 500.00, 4% yearly interest, Rs. 50,000 withdrawal limit.
+Customer ID: Customer: Karan Patel
+Opening deposit amount: [ERROR] Invalid amount: Minimum opening deposit for a Savings account is Rs. 500.00.
+
+====================================================
+                CREATE BANK ACCOUNT
+====================================================
+1. Create Savings Account
+2. Create Current Account
+3. Close an Account
+4. Check Account Status
+5. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                Open Savings Account
+----------------------------------------------------
+Rules: minimum opening deposit Rs. 500.00, 4% yearly interest, Rs. 50,000 withdrawal limit.
+Customer ID: Customer: Karan Patel
+Opening deposit amount: [SUCCESS] Savings account created. Account number: SB1010
+Bank             : Java National Bank
+Account Number   : SB1010
+Account Type     : Savings
+Customer ID      : C1007
+Account Holder   : Karan Patel
+Balance          : Rs. 2,000.00
+Status           : ACTIVE
+Opened On        : 2026-11-20
+Withdrawal Limit : Rs. 50,000.00
+Interest Rate    : 4.00% per year
+Yearly Interest  : Rs. 80.00 (estimated)
+
+====================================================
+                CREATE BANK ACCOUNT
+====================================================
+1. Create Savings Account
+2. Create Current Account
+3. Close an Account
+4. Check Account Status
+5. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                Open Savings Account
+----------------------------------------------------
+Rules: minimum opening deposit Rs. 500.00, 4% yearly interest, Rs. 50,000 withdrawal limit.
+Customer ID: Customer: Aarav Sharma
+Opening deposit amount: [ERROR] Customer C1001 already has an active Savings account (SB1001). Only one active account of each type is allowed.
+
+====================================================
+                CREATE BANK ACCOUNT
+====================================================
+1. Create Savings Account
+2. Create Current Account
+3. Close an Account
+4. Check Account Status
+5. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                Open Current Account
+----------------------------------------------------
+Rules: minimum opening deposit Rs. 1,000.00, no interest, Rs. 2,00,000 withdrawal limit.
+Customer ID: Customer: Priya Nair
+Opening deposit amount: [SUCCESS] Current account created. Account number: CA1011
+Bank             : Java National Bank
+Account Number   : CA1011
+Account Type     : Current
+Customer ID      : C1002
+Account Holder   : Priya Nair
+Balance          : Rs. 5,000.00
+Status           : ACTIVE
+Opened On        : 2026-11-20
+Withdrawal Limit : Rs. 200,000.00
+Interest Rate    : Not applicable (current account)
+Overdraft        : Not allowed
+
+====================================================
+                CREATE BANK ACCOUNT
+====================================================
+1. Create Savings Account
+2. Create Current Account
+3. Close an Account
+4. Check Account Status
+5. Return to Main Menu
+====================================================
+Enter Your Choice: Account number: Account SB1009 (Fatima Khan) status: CLOSED - no transactions allowed
+
+====================================================
+                CREATE BANK ACCOUNT
+====================================================
+1. Create Savings Account
+2. Create Current Account
+3. Close an Account
+4. Check Account Status
+5. Return to Main Menu
+====================================================
+Enter Your Choice: Account number to close: Bank             : Java National Bank
+Account Number   : CA1011
+Account Type     : Current
+Customer ID      : C1002
+Account Holder   : Priya Nair
+Balance          : Rs. 5,000.00
+Status           : ACTIVE
+Opened On        : 2026-11-20
+Withdrawal Limit : Rs. 200,000.00
+Interest Rate    : Not applicable (current account)
+Overdraft        : Not allowed
+Close this account? (y/n): [ERROR] Account CA1011 still has a balance of Rs. 5,000.00. Withdraw or transfer it before closing.
+
+====================================================
+                CREATE BANK ACCOUNT
+====================================================
+1. Create Savings Account
+2. Create Current Account
+3. Close an Account
+4. Check Account Status
+5. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                 All Bank Accounts
+----------------------------------------------------
++------------+-------------+--------------+---------+----------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance        | Status | Opened On  |
++------------+-------------+--------------+---------+----------------+--------+------------+
+| CA1002     | C1001       | Aarav Sharma | Current | Rs. 150,000.00 | ACTIVE | 2026-01-12 |
+| CA1005     | C1004       | Sneha Reddy  | Current | Rs. 92,000.00  | ACTIVE | 2026-03-05 |
+| CA1008     | C1007       | Karan Patel  | Current | Rs. 64,000.00  | ACTIVE | 2026-05-30 |
+| CA1011     | C1002       | Priya Nair   | Current | Rs. 5,000.00   | ACTIVE | 2026-11-20 |
+| SB1001     | C1001       | Aarav Sharma | Savings | Rs. 25,000.00  | ACTIVE | 2026-01-10 |
+| SB1003     | C1002       | Priya Nair   | Savings | Rs. 48,250.50  | ACTIVE | 2026-02-03 |
+| SB1004     | C1003       | Rohan Mehta  | Savings | Rs. 7,800.00   | ACTIVE | 2026-02-20 |
+| SB1006     | C1005       | Vikram Singh | Savings | Rs. 315,000.75 | ACTIVE | 2026-03-18 |
+| SB1007     | C1006       | Ananya Iyer  | Savings | Rs. 1,200.00   | ACTIVE | 2026-04-22 |
+| SB1009     | C1008       | Fatima Khan  | Savings | Rs. 0.00       | CLOSED | 2026-06-14 |
+| SB1010     | C1007       | Karan Patel  | Savings | Rs. 2,000.00   | ACTIVE | 2026-11-20 |
++------------+-------------+--------------+---------+----------------+--------+------------+
+Total records: 11
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: Enter account number: 
+----------------------------------------------------
+                  Account Details
+----------------------------------------------------
+Bank             : Java National Bank
+Account Number   : SB1003
+Account Type     : Savings
+Customer ID      : C1002
+Account Holder   : Priya Nair
+Balance          : Rs. 48,250.50
+Status           : ACTIVE
+Opened On        : 2026-02-03
+Withdrawal Limit : Rs. 50,000.00
+Interest Rate    : 4.00% per year
+Yearly Interest  : Rs. 1,930.02 (estimated)
+
+----------------------------------------------------
+             Account Holder Information
+----------------------------------------------------
+Customer ID : C1002
+Full Name   : Priya Nair
+Age         : 34
+Email       : priya.nair@example.com
+Phone       : 9845012345
+Address     : 45 Marine Drive, Kochi
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: Enter account number: [ERROR] Account not found with number: SB9999
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Deposit Money
+----------------------------------------------------
+Account number:    -> Karan Patel | Savings | Balance Rs. 2,000.00 | ACTIVE
+Deposit amount: [ERROR] Amount must be greater than zero.
+Deposit amount: [ERROR] 'abc' is not a valid number.
+Deposit amount: [ERROR] Amount can have at most 2 decimal places (paise).
+Deposit amount: [SUCCESS] Rs. 2,500.50 deposited. Updated balance: Rs. 4,500.50
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Deposit Money
+----------------------------------------------------
+Account number:    -> Fatima Khan | Savings | Balance Rs. 0.00 | CLOSED
+Deposit amount: [ERROR] Account SB1009 is closed. No transactions allowed.
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Withdraw Money
+----------------------------------------------------
+Account number:    -> Rohan Mehta | Savings | Balance Rs. 7,800.00 | ACTIVE
+Withdrawal amount: [ERROR] Insufficient balance. Available: Rs. 7,800.00, Requested: Rs. 10,000.00
+[INFO] Balance unchanged. The refused attempt was saved in the history as FAILED.
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Withdraw Money
+----------------------------------------------------
+Account number:    -> Vikram Singh | Savings | Balance Rs. 315,000.75 | ACTIVE
+Withdrawal amount: [ERROR] Invalid amount: Amount exceeds the single withdrawal limit of Rs. 50,000.00 for a Savings account.
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Withdraw Money
+----------------------------------------------------
+Account number:    -> Rohan Mehta | Savings | Balance Rs. 7,800.00 | ACTIVE
+Withdrawal amount: [SUCCESS] Rs. 800.00 withdrawn. Updated balance: Rs. 7,000.00
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Transfer Money
+----------------------------------------------------
+Sender account number  :    -> Aarav Sharma | Savings | Balance Rs. 25,000.00 | ACTIVE
+Receiver account number:    -> Sneha Reddy | Current | Balance Rs. 92,000.00 | ACTIVE
+Transfer amount: Transfer Rs. 5,000.00 from SB1001 to CA1005? (y/n): [SUCCESS] Transfer completed. Reference ID: TRF-20261120230512-008
+Sender   SB1001 new balance: Rs. 20,000.00
+Receiver CA1005 new balance: Rs. 97,000.00
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Transfer Money
+----------------------------------------------------
+Sender account number  :    -> Ananya Iyer | Savings | Balance Rs. 1,200.00 | ACTIVE
+Receiver account number:    -> Aarav Sharma | Savings | Balance Rs. 20,000.00 | ACTIVE
+Transfer amount: Transfer Rs. 5,000.00 from SB1007 to SB1001? (y/n): [ERROR] Insufficient balance. Available: Rs. 1,200.00, Requested: Rs. 5,000.00
+[INFO] Transfer cancelled. No money was moved. The attempt was saved as FAILED.
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Transfer Money
+----------------------------------------------------
+Sender account number  :    -> Aarav Sharma | Savings | Balance Rs. 20,000.00 | ACTIVE
+Receiver account number:    -> Aarav Sharma | Savings | Balance Rs. 20,000.00 | ACTIVE
+[ERROR] Sender and receiver accounts must be different.
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Transfer Money
+----------------------------------------------------
+Sender account number  :    -> Aarav Sharma | Savings | Balance Rs. 20,000.00 | ACTIVE
+Receiver account number:    -> Fatima Khan | Savings | Balance Rs. 0.00 | CLOSED
+Transfer amount: Transfer Rs. 100.00 from SB1001 to SB1009? (y/n): [ERROR] Transfer refused: Receiver account SB1009 is closed.
+[INFO] No money was moved.
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   Transfer Money
+----------------------------------------------------
+Sender account number  :    -> Aarav Sharma | Savings | Balance Rs. 20,000.00 | ACTIVE
+Receiver account number:    -> Sneha Reddy | Current | Balance Rs. 97,000.00 | ACTIVE
+Transfer amount: Transfer Rs. 100.00 from SB1001 to CA1005? (y/n): [INFO] Transfer cancelled by user.
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: Enter account number: 
+----------------------------------------------------
+                  Balance Inquiry
+----------------------------------------------------
+Account Number    : SB1006
+Account Holder    : Vikram Singh
+Account Type      : Savings
+Available Balance : Rs. 315,000.75
+Account Status    : ACTIVE
+Yearly Interest   : Rs. 12,600.03 (estimate)
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: Enter account number: 
+----------------------------------------------------
+                  Balance Inquiry
+----------------------------------------------------
+Account Number    : CA1002
+Account Holder    : Aarav Sharma
+Account Type      : Current
+Available Balance : Rs. 150,000.00
+Account Status    : ACTIVE
+Yearly Interest   : Rs. 0.00 (estimate)
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for banking with Java National Bank. Goodbye!

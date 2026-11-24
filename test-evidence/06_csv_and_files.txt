@@ -1,0 +1,243 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to write [data/customers.csv]: [SUCCESS] 8 customer(s) exported to data/customers.csv
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to write [data/accounts.csv]: [SUCCESS] 11 account(s) exported to data/accounts.csv
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to write [data/transactions.csv]: [SUCCESS] 16 transaction(s) exported to data/transactions.csv
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to import [data/customers.csv]: 
+----------------------------------------------------
+                   Import Result
+----------------------------------------------------
+Valid rows read from file : 2
+Saved to database         : 1
+Problems found            : 7
+   - Line 3: Customer ID must be 'C' followed by 4 digits, for example C1001.
+   - Line 4: Age must be between 18 and 100 to open a bank account.
+   - Line 5: Email address is not valid (example: name@example.com).
+   - Line 6: Phone must be a 10-digit mobile number starting with 6, 7, 8 or 9.
+   - Line 7: expected 6 values but found 3.
+   - Line 8: customer ID C2001 appears more than once in the file.
+   - Customer C1001 skipped: Customer ID C1001 is already registered.
+[SUCCESS] 1 customer(s) imported.
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to import [data/accounts.csv]: 
+----------------------------------------------------
+                   Import Result
+----------------------------------------------------
+Valid rows read from file : 3
+Saved to database         : 1
+Problems found            : 8
+   - Line 4: Account CA2003 must start with SB for a Savings account.
+   - Line 5: Balance cannot be negative.
+   - Line 6: 'abc' is not a valid number.
+   - Line 7: A CLOSED account must have a zero balance.
+   - Line 8: Creation date 2099-01-01 is in the future.
+   - Line 9: Invalid account type: LOAN (use SAVINGS or CURRENT)
+   - Account SB2002 skipped: Customer not found with ID: C9999
+   - Account SB1001 skipped: Account number SB1001 already exists.
+[SUCCESS] 1 account(s) imported.
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to import [data/customers.csv]: [ERROR] File error: File not found: /home/claude/BankManagementSystem/data/missing.csv
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to import [data/customers.csv]: [ERROR] File error: Wrong file format. The first line must be: customer_id,name,age,email,phone,address
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: [SUCCESS] Database backed up to data/backup/bank_management_20261120_230546.db (49,152 bytes copied).
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to analyse [data/accounts.csv]: 
+----------------------------------------------------
+   StreamTokenizer Analysis of data/accounts.csv
+----------------------------------------------------
+Lines           : 12
+Words           : 50
+Numbers         : 44
+Quoted values   : 0
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to analyse [data/accounts.csv]: 
+----------------------------------------------------
+   StreamTokenizer Analysis of data/customers.csv
+----------------------------------------------------
+Lines           : 9
+Words           : 38
+Numbers         : 16
+Quoted values   : 8
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for banking with Java National Bank. Goodbye!

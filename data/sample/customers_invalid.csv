@@ -1,0 +1,9 @@
+customer_id,name,age,email,phone,address
+C2001,Valid Person,30,valid.person@example.com,9876501234,"1 Good Street, Pune"
+X99,Bad Id,30,bad.id@example.com,9876501235,Somewhere Road
+C2002,Too Young,15,young@example.com,9876501236,School Road Delhi
+C2003,No Email,40,not-an-email,9876501237,Main Road Goa
+C2004,Short Phone,40,short.phone@example.com,12345,Main Road Goa
+C2005,Missing Columns,40
+C2001,Duplicate In File,33,dup@example.com,9876501238,Second Street Pune
+C1001,Already In Database,29,someone.new@example.com,9876501239,Third Street Pune

@@ -1,0 +1,290 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+              ArrayList and LinkedList
+----------------------------------------------------
+ArrayList size         : 9
+ArrayList get(0)       : C1001 - Aarav Sharma
+ArrayList contains it? : true
+LinkedList (3 most recently viewed accounts, newest first): [SB2001, SB1010, SB1009]
+LinkedList getFirst() = SB2001, getLast() = SB1009
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+         HashSet, LinkedHashSet and TreeSet
+----------------------------------------------------
+HashSet - customers who own at least one account (9 unique out of 12 accounts): [C1005, C1004, C1003, C1002, C1001, C2001, C1008, C1007, C1006]
+LinkedHashSet - accounts in order of first activity: [SB1001, CA1002, SB1003, SB1004, CA1005, SB1006, SB1007, CA1008, SB1010, CA1011, SB2001]
+TreeSet - customer names sorted A-Z: [Aarav Sharma, Ananya Iyer, Fatima Khan, Karan Patel, Priya Nair, Rohan Mehta, Sneha Reddy, Valid Person, Vikram Singh]
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+         HashMap, LinkedHashMap and TreeMap
+----------------------------------------------------
+HashMap - number of accounts per customer: {C1005=1, C1004=1, C1003=1, C1002=2, C1001=2, C2001=1, C1008=1, C1007=2, C1006=1}
+LinkedHashMap - balance by account (insertion order): {CA1002=Rs. 150,000.00, CA1005=Rs. 97,000.00, CA1008=Rs. 64,000.00, CA1011=Rs. 5,000.00, SB1001=Rs. 20,000.00, SB1003=Rs. 48,250.50, SB1004=Rs. 7,000.00, SB1006=Rs. 315,000.75, SB1007=Rs. 1,200.00, SB1009=Rs. 0.00, SB1010=Rs. 4,500.50, SB2001=Rs. 5,000.00}
+TreeMap - total balance per account type (sorted keys): {SAVINGS=400951.75, CURRENT=316000.00}
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+           Queue, Deque and PriorityQueue
+----------------------------------------------------
+Queue (first in, first out) - customers waiting: [Aarav Sharma, Priya Nair, Rohan Mehta, Sneha Reddy, Vikram Singh, Ananya Iyer, Karan Patel, Fatima Khan, Valid Person]
+   poll() serves: Aarav Sharma | next in line (peek): Priya Nair
+Deque as a stack - latest operation first: [View balance of SB2001, Withdraw Rs. 200 from CA1002, Deposit Rs. 500 to CA1002]
+   pop() undoes: View balance of SB2001
+   Deque works at both ends: first = Withdraw Rs. 200 from CA1002 | last = Oldest note added at the back
+PriorityQueue - serve highest balance first:
+   1. SB1006 (Savings, Vikram Singh, Rs. 315,000.75)
+   2. CA1002 (Current, Aarav Sharma, Rs. 150,000.00)
+   3. CA1005 (Current, Sneha Reddy, Rs. 97,000.00)
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+             Iterator and ListIterator
+----------------------------------------------------
+Iterator removed 1 closed account(s). Active accounts left: 11
+ListIterator backwards (after set() to UPPER CASE): VALID PERSON, FATIMA KHAN, KARAN PATEL, ANANYA IYER, VIKRAM SINGH, SNEHA REDDY, ROHAN MEHTA, PRIYA NAIR, AARAV SHARMA
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+   Comparable, Comparator and Collections methods
+----------------------------------------------------
+Collections.sort (Comparable, by ID)      : [C1001 - Aarav Sharma, C1002 - Priya Nair, C1003 - Rohan Mehta, C1004 - Sneha Reddy, C1005 - Vikram Singh, C1006 - Ananya Iyer, C1007 - Karan Patel, C1008 - Fatima Khan, C2001 - Valid Person]
+Collections.sort (Comparator, by name)    : [C1001 - Aarav Sharma, C1006 - Ananya Iyer, C1008 - Fatima Khan, C1007 - Karan Patel, C1002 - Priya Nair, C1003 - Rohan Mehta, C1004 - Sneha Reddy, C2001 - Valid Person, C1005 - Vikram Singh]
+Collections.reverse                        : [C1005 - Vikram Singh, C2001 - Valid Person, C1004 - Sneha Reddy, C1003 - Rohan Mehta, C1002 - Priya Nair, C1007 - Karan Patel, C1008 - Fatima Khan, C1006 - Ananya Iyer, C1001 - Aarav Sharma]
+Collections.max (oldest, by age Comparator): C1005 - Vikram Singh - age 52
+Collections.min (youngest)                 : C1004 - Sneha Reddy - age 25
+Collections.max (Comparable, highest account number): SB2001 (Savings, Valid Person, Rs. 5,000.00)
+Collections.min (Comparator, lowest balance)         : SB1009 (Savings, Fatima Khan, Rs. 0.00)
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+        Strings, Arrays and Wrapper Classes
+----------------------------------------------------
+literalOne == literalTwo      : true  (same pooled object)
+literalOne == new String(...) : false (different objects)
+literalOne.equals(created)    : true  (same text - always use equals)
+created.intern() == literalOne: true  (intern() returns the pooled copy)
+Immutability: after toUpperCase(), name is still 'ravi kumar', new String is 'RAVI KUMAR'
+equalsIgnoreCase       : true
+compareTo("Anil")      : 17 (positive = comes after)
+indexOf('@')           : 10
+substring (domain)     : Example.com
+contains("Example")    : true
+replace + toLowerCase  : ravi.kumar@bank.com
+String.format          : SB1001    | SAVINGS|  125,000.50
+Masked phone           : 98******10
+StringBuilder result   : [SB1001-ACTIVE] | StringBuffer result: Log: deposit ok
+2-D array int[3][3] of monthly deposits:
++-----------+-------+------+------+-------+
+| Account   | Jan   | Feb  | Mar  | Total |
++-----------+-------+------+------+-------+
+| Account 1 | 5000  | 2000 | 3500 | 10500 |
+| Account 2 | 12000 | 0    | 8000 | 20000 |
+| Account 3 | 700   | 700  | 700  | 2100  |
++-----------+-------+------+------+-------+
+Total records: 3
+Arrays.sort            : [CA1001, CA1003, SB1002, SB1004]
+Arrays.binarySearch SB1002 -> index 2
+Integer.parseInt("34") = 34, boxed = 34, unboxed = 34, Double.parseDouble = 4.0, sum of List<Integer> = 59
+Integer.valueOf(127) == Integer.valueOf(127): true (cached) but always compare wrapper values with equals()
+Why BigDecimal? 0.1 + 0.2 as double = 0.30000000000000004 but as BigDecimal = 0.3. Money: 1500.75
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: [INFO] Using live data: 9 customers, 12 accounts, 17 transactions.
+
+----------------------------------------------------
+Lambda, Functional Interfaces, Lazy Streams and Generics
+----------------------------------------------------
+Supplier gives the bank name : Java National Bank
+BiFunction adds 100 + 250.50  : 350.50
+Function -> customer initials : [AS, PN, RM, SR, VS, AI, KP, FK, VP]
+Predicate -> accounts >= Rs. 10,000: [CA1002, CA1005, CA1008, SB1001, SB1003, SB1006]
+Custom @FunctionalInterface: 4% of Rs. 25,000 = Rs. 1000
+
+Lazy evaluation - building a pipeline (nothing printed yet):
+Pipeline built. Now calling the terminal operation limit(2).collect(...):
+   filter() checking CA1002
+   map() converting CA1002
+   filter() checking CA1005
+   map() converting CA1005
+Result: [CA1002, CA1005] - processing stopped as soon as 2 items were found.
+distinct() account types      : [Current, Savings]
+sorted().skip(1) customer names: [Ananya Iyer, Fatima Khan, Karan Patel, Priya Nair, Rohan Mehta, Sneha Reddy, Valid Person, Vikram Singh]
+Generic class Pair<String, BigDecimal> : (CA1002, 150000.00)
+Generic method firstOrDefault (String) : SB1001
+Generic method firstOrDefault (empty)  : -1
+Bounded <T extends Number> average of [10, 20, 45] = 25.0
+Wildcard List<? extends BankAccount> count = 11
+
+====================================================
+             COLLECTIONS DEMONSTRATION
+====================================================
+1. ArrayList and LinkedList
+2. HashSet, LinkedHashSet and TreeSet
+3. HashMap, LinkedHashMap and TreeMap
+4. Queue, Deque and PriorityQueue
+5. Iterator and ListIterator
+6. Comparable, Comparator and Collections methods
+7. Strings, Arrays and Wrapper Classes
+8. Lambda, Streams and Generics
+9. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for banking with Java National Bank. Goodbye!

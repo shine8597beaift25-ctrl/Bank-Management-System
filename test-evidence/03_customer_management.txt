@@ -1,0 +1,250 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: [ERROR] 'abc' is not a valid number. Please try again.
+Enter Your Choice: [ERROR] Please enter a number from 1 to 15.
+Enter Your Choice: 
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+               Register New Customer
+----------------------------------------------------
+Customer ID (press Enter to use the suggestion) [C1009]: Full Name   : Age         : [ERROR] Age must be a whole number.
+Age         : [ERROR] Age must be between 18 and 100 to open a bank account.
+Age         : Email       : [ERROR] Email address is not valid (example: name@example.com).
+Email       : Phone       : [ERROR] Phone must be a 10-digit mobile number starting with 6, 7, 8 or 9.
+Phone       : Address     : [SUCCESS] Customer registered successfully.
+Customer ID : C1009
+Full Name   : Neha Verma
+Age         : 27
+Email       : neha.verma@example.com
+Phone       : 9876511111
+Address     : 14 Lake Road, Pune
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                   All Customers
+----------------------------------------------------
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| Customer ID | Name         | Age | Email                    | Phone      | Address                      |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+| C1001       | Aarav Sharma | 28  | aarav.sharma@example.com | 9876543210 | 12 MG Road, Bengaluru        |
+| C1002       | Priya Nair   | 34  | priya.nair@example.com   | 9845012345 | 45 Marine Drive, Kochi       |
+| C1003       | Rohan Mehta  | 41  | rohan.mehta@example.com  | 9123456780 | 8 Park Street, Kolkata       |
+| C1004       | Sneha Reddy  | 25  | sneha.reddy@example.com  | 9988776655 | 221 Banjara Hills, Hyderabad |
+| C1005       | Vikram Singh | 52  | vikram.singh@example.com | 9811122233 | 17 Civil Lines, Jaipur       |
+| C1006       | Ananya Iyer  | 30  | ananya.iyer@example.com  | 9000011111 | 3 T Nagar, Chennai           |
+| C1007       | Karan Patel  | 45  | karan.patel@example.com  | 9727272727 | 90 CG Road, Ahmedabad        |
+| C1008       | Fatima Khan  | 38  | fatima.khan@example.com  | 9654321098 | 5 Hazratganj, Lucknow        |
+| C1009       | Neha Verma   | 27  | neha.verma@example.com   | 9876511111 | 14 Lake Road, Pune           |
++-------------+--------------+-----+--------------------------+------------+------------------------------+
+Total records: 9
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: Enter Customer ID: 
+----------------------------------------------------
+                  Customer Details
+----------------------------------------------------
+Customer ID : C1001
+Full Name   : Aarav Sharma
+Age         : 28
+Email       : aarav.sharma@example.com
+Phone       : 9876543210
+Address     : 12 MG Road, Bengaluru
+
+Accounts of this customer:
++------------+-------------+--------------+---------+----------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance        | Status | Opened On  |
++------------+-------------+--------------+---------+----------------+--------+------------+
+| CA1002     | C1001       | Aarav Sharma | Current | Rs. 150,000.00 | ACTIVE | 2026-01-12 |
+| SB1001     | C1001       | Aarav Sharma | Savings | Rs. 25,000.00  | ACTIVE | 2026-01-10 |
++------------+-------------+--------------+---------+----------------+--------+------------+
+Total records: 2
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: Enter Customer ID: [ERROR] Customer not found with ID: C9999
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: Enter Customer ID to update: 
+----------------------------------------------------
+               Update Customer C1009
+----------------------------------------------------
+Press Enter to keep the current value shown in [brackets].
+Full Name [Neha Verma]: Age [27]: Email [neha.verma@example.com]: Phone [9876511111]: Address [14 Lake Road, Pune]: [SUCCESS] Customer details updated.
+Customer ID : C1009
+Full Name   : Neha Verma
+Age         : 28
+Email       : neha.verma@example.com
+Phone       : 9876511111
+Address     : 22 Lake Road, Pune
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+               Register New Customer
+----------------------------------------------------
+Customer ID (press Enter to use the suggestion) [C1010]: [ERROR] Customer ID C1001 is already registered.
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: Enter Customer ID to delete: Customer ID : C1001
+Full Name   : Aarav Sharma
+Age         : 28
+Email       : aarav.sharma@example.com
+Phone       : 9876543210
+Address     : 12 MG Road, Bengaluru
+Are you sure you want to delete this customer? (y/n): [ERROR] Customer C1001 has 2 account(s) on record and cannot be deleted. Accounts keep their history; close them instead.
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: Enter Customer ID to delete: Customer ID : C1009
+Full Name   : Neha Verma
+Age         : 28
+Email       : neha.verma@example.com
+Phone       : 9876511111
+Address     : 22 Lake Road, Pune
+Are you sure you want to delete this customer? (y/n): [INFO] Delete cancelled.
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: Enter Customer ID to delete: Customer ID : C1009
+Full Name   : Neha Verma
+Age         : 28
+Email       : neha.verma@example.com
+Phone       : 9876511111
+Address     : 22 Lake Road, Pune
+Are you sure you want to delete this customer? (y/n): [SUCCESS] Customer C1009 deleted.
+
+====================================================
+                CUSTOMER MANAGEMENT
+====================================================
+1. Register Customer
+2. View All Customers
+3. Search Customer
+4. Update Customer
+5. Delete Customer
+6. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for banking with Java National Bank. Goodbye!

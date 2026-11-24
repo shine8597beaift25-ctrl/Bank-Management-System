@@ -1,0 +1,11 @@
+out/
+out-test/
+target/
+data/test_bank.db
+*.class
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+nbproject/private/

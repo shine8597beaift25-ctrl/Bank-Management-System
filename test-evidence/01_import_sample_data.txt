@@ -1,0 +1,142 @@
+[INFO] Connected to database: data/bank_management.db
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to import [data/customers.csv]: 
+----------------------------------------------------
+                   Import Result
+----------------------------------------------------
+Valid rows read from file : 8
+Saved to database         : 8
+Problems found            : 0
+[SUCCESS] 8 customer(s) imported.
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: File to import [data/accounts.csv]: 
+----------------------------------------------------
+                   Import Result
+----------------------------------------------------
+Valid rows read from file : 9
+Saved to database         : 9
+Problems found            : 0
+[SUCCESS] 9 account(s) imported.
+
+====================================================
+                IMPORT / EXPORT CSV
+====================================================
+1. Export Customers
+2. Export Accounts
+3. Export Transactions
+4. Import Customers
+5. Import Accounts
+6. Backup Database File (byte streams)
+7. Analyse a CSV File (StreamTokenizer)
+8. Return to Main Menu
+====================================================
+Enter Your Choice: 
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+----------------------------------------------------
+                 All Bank Accounts
+----------------------------------------------------
++------------+-------------+--------------+---------+----------------+--------+------------+
+| Account No | Customer ID | Holder Name  | Type    | Balance        | Status | Opened On  |
++------------+-------------+--------------+---------+----------------+--------+------------+
+| CA1002     | C1001       | Aarav Sharma | Current | Rs. 150,000.00 | ACTIVE | 2026-01-12 |
+| CA1005     | C1004       | Sneha Reddy  | Current | Rs. 92,000.00  | ACTIVE | 2026-03-05 |
+| CA1008     | C1007       | Karan Patel  | Current | Rs. 64,000.00  | ACTIVE | 2026-05-30 |
+| SB1001     | C1001       | Aarav Sharma | Savings | Rs. 25,000.00  | ACTIVE | 2026-01-10 |
+| SB1003     | C1002       | Priya Nair   | Savings | Rs. 48,250.50  | ACTIVE | 2026-02-03 |
+| SB1004     | C1003       | Rohan Mehta  | Savings | Rs. 7,800.00   | ACTIVE | 2026-02-20 |
+| SB1006     | C1005       | Vikram Singh | Savings | Rs. 315,000.75 | ACTIVE | 2026-03-18 |
+| SB1007     | C1006       | Ananya Iyer  | Savings | Rs. 1,200.00   | ACTIVE | 2026-04-22 |
+| SB1009     | C1008       | Fatima Khan  | Savings | Rs. 0.00       | CLOSED | 2026-06-14 |
++------------+-------------+--------------+---------+----------------+--------+------------+
+Total records: 9
+
+====================================================
+               BANK MANAGEMENT SYSTEM
+====================================================
+
+1. Customer Management
+2. Create Bank Account
+3. View All Bank Accounts
+4. Search Bank Account
+5. Deposit Money
+6. Withdraw Money
+7. Transfer Money
+8. Check Account Balance
+9. Transaction History
+10. Banking Reports
+11. Sort Customer Records
+12. Import / Export CSV
+13. Collections Demonstration
+14. Multithreading Demonstration
+15. Exit
+
+====================================================
+Enter Your Choice: 
+Thank you for using the Java National Bank Bank Management System. Goodbye!
