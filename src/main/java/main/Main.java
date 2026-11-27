@@ -43,7 +43,7 @@ import java.util.NoSuchElementException;
  * Main only handles the MENUS (input and output). All rules live in the
  * service classes, and all SQL lives in the repository classes:
  *
- *     Main (menus)  ->  Services (business rules)  ->  Repositories (SQL)  ->  SQLite database
+ *     Main (menus)  ->  Services (business rules)  ->  Repositories (SQL)  ->  MySQL database
  *
  * Every menu option runs through runSafely(...), which catches every expected
  * exception and prints a clear message, so the program never stops unexpectedly.
@@ -89,8 +89,15 @@ public class Main {
         try {
             DatabaseManager.initialiseDatabase();
             application.accountService.loadAccountSequence();
-            ConsoleUtil.printInfo("Connected to database: " + DatabaseManager.getDatabasePath());
-        } catch (SQLException | IOException e) {
+            ConsoleUtil.printInfo("Connected to " + DatabaseManager.getDatabaseDescription());
+        } catch (SQLException e) {
+            ConsoleUtil.printError("Could not connect to MySQL: " + e.getMessage());
+            if (!String.valueOf(e.getMessage()).startsWith("MySQL JDBC driver not found")) {
+                ConsoleUtil.printInfo("Check that the MySQL server is running and that the user name and password in "
+                        + DatabaseManager.SETTINGS_FILE + " are correct.");
+            }
+            return;
+        } catch (IOException | IllegalStateException e) {
             ConsoleUtil.printError("Could not start the application: " + e.getMessage());
             return;
         }
@@ -608,7 +615,7 @@ public class Main {
         while (true) {
             int choice = showSubMenu("Import / Export CSV",
                     "Export Customers", "Export Accounts", "Export Transactions", "Import Customers",
-                    "Import Accounts", "Backup Database File (byte streams)", "Analyse a CSV File (StreamTokenizer)");
+                    "Import Accounts", "Back Up Database to an SQL File (byte streams)", "Analyse a CSV File (StreamTokenizer)");
             switch (choice) {
                 case 1: runSafely(() -> {
                     String path = InputHelper.readLineOrDefault("File to write", FileManager.CUSTOMERS_CSV);
@@ -664,10 +671,18 @@ public class Main {
         }
     }
 
-    private void backupDatabase() throws IOException {
-        String target = "data/backup/bank_management_" + LocalDateTime.now().format(FILE_TIMESTAMP) + ".db";
-        long bytes = fileManager.copyFile(DatabaseManager.getDatabasePath(), target);
-        ConsoleUtil.printSuccess("Database backed up to " + target + " (" + String.format("%,d", bytes) + " bytes copied).");
+    private void backupDatabase() throws IOException, SQLException {
+        String target = "data/backup/bank_backup_" + LocalDateTime.now().format(FILE_TIMESTAMP) + ".sql";
+        List<Customer> customers = customerService.getAllCustomers();
+        List<BankAccount> accounts = accountService.getAllAccounts();
+        List<Transaction> transactions = transactionService.getTransactions();
+        long written = fileManager.writeSqlBackup(target, DatabaseManager.getDatabaseName(), customers, accounts, transactions);
+        long readBack = fileManager.countBytes(target);
+        ConsoleUtil.printSuccess("Backup saved to " + target + ": " + customers.size() + " customers, " + accounts.size()
+                + " accounts, " + transactions.size() + " transactions.");
+        System.out.println("Bytes written (FileOutputStream): " + String.format("%,d", written)
+                + " | bytes read back (FileInputStream): " + String.format("%,d", readBack)
+                + (written == readBack ? " - backup verified." : " - SIZE MISMATCH!"));
     }
 
     private void analyseCsvFile() throws IOException {

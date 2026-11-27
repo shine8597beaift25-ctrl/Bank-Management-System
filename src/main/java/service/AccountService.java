@@ -32,11 +32,15 @@ import java.util.Optional;
  *   nothing is saved with rollback(). For a transfer this means the
  *   sender's debit and the receiver's credit succeed together or fail together.
  *
- * THREAD SAFETY
- *   deposit, withdraw and transfer are "synchronized" methods. Only one thread
- *   at a time can run any of them on this service object (they share the
- *   object's intrinsic lock). This stops two threads from reading the same old
- *   balance and overwriting each other (a race condition / lost update).
+ * THREAD AND CONNECTION SAFETY (two layers)
+ *   1. deposit, withdraw and transfer are "synchronized" methods. Only one thread
+ *      at a time can run any of them on this service object (they share the
+ *      object's intrinsic lock). This stops two threads in this program from
+ *      reading the same old balance and overwriting each other (a lost update).
+ *   2. Inside the database transaction the account row is read with
+ *      SELECT ... FOR UPDATE, which makes MySQL lock that row until commit or
+ *      rollback. This protects the balance even against a second copy of the
+ *      program (or another tool) connected to the same MySQL database.
  */
 public class AccountService {
 
@@ -144,7 +148,7 @@ public class AccountService {
         try (Connection connection = DatabaseManager.getConnection()) {
             connection.setAutoCommit(false);
             try {
-                BankAccount account = findAccount(connection, cleaned);
+                BankAccount account = lockAccount(connection, cleaned);
                 account.deposit(amount);   // checks: account active, amount > 0
                 requireOneRowChanged(accountRepository.updateBalance(connection, cleaned, account.getBalance()), cleaned);
                 transactionService.recordSuccess(connection, cleaned, TransactionType.DEPOSIT, amount,
@@ -172,7 +176,7 @@ public class AccountService {
         try (Connection connection = DatabaseManager.getConnection()) {
             connection.setAutoCommit(false);
             try {
-                BankAccount account = findAccount(connection, cleaned);
+                BankAccount account = lockAccount(connection, cleaned);
                 account.withdraw(amount);  // checks: active, amount > 0, limit, enough balance
                 requireOneRowChanged(accountRepository.updateBalance(connection, cleaned, account.getBalance()), cleaned);
                 transactionService.recordSuccess(connection, cleaned, TransactionType.WITHDRAWAL, amount,
@@ -211,8 +215,14 @@ public class AccountService {
         try (Connection connection = DatabaseManager.getConnection()) {
             connection.setAutoCommit(false);   // START of the database transaction
             try {
-                BankAccount sender = findAccount(connection, fromAccount);
-                BankAccount receiver = findAccount(connection, toAccount);
+                // Lock both rows, always in alphabetical order. If two opposite transfers
+                // (A->B and B->A) run at the same time, both try to lock the same row first,
+                // so they can never wait for each other forever (no deadlock).
+                boolean senderFirst = fromAccount.compareTo(toAccount) < 0;
+                BankAccount firstLocked = lockAccount(connection, senderFirst ? fromAccount : toAccount);
+                BankAccount secondLocked = lockAccount(connection, senderFirst ? toAccount : fromAccount);
+                BankAccount sender = senderFirst ? firstLocked : secondLocked;
+                BankAccount receiver = senderFirst ? secondLocked : firstLocked;
                 if (!receiver.isActive()) {
                     throw new IllegalStateException("Receiver account " + toAccount + " is closed.");
                 }
@@ -298,9 +308,10 @@ public class AccountService {
     // Private helpers
     // =====================================================================
 
-    private BankAccount findAccount(Connection connection, String accountNumber)
+    /** Reads the account and locks its row (SELECT ... FOR UPDATE) for the current database transaction. */
+    private BankAccount lockAccount(Connection connection, String accountNumber)
             throws AccountNotFoundException, SQLException {
-        return accountRepository.findById(connection, accountNumber)
+        return accountRepository.findByIdForUpdate(connection, accountNumber)
                 .orElseThrow(() -> new AccountNotFoundException(accountNumber));
     }
 

@@ -1,51 +1,65 @@
 -- =====================================================================
--- Bank Management System - SQLite database schema
--- Database file: data/bank_management.db
+-- Bank Management System - MySQL database schema
+-- Database: bank_management (name set in db.properties)
+-- Needs MySQL 8.0.16 or newer (older versions ignore CHECK rules).
 --
--- Note on money columns:
---   SQLite has no exact DECIMAL type. If we used REAL, values like 0.1
---   would be stored as floating point and could lose paise.
---   So balance and amount are stored as TEXT (for example '1500.00')
---   and converted to java.math.BigDecimal in Java. The CHECK rules
---   below still stop negative balances and non-positive amounts.
+-- The program runs this file automatically at start-up. Every statement
+-- uses IF NOT EXISTS, so existing tables and data are never touched.
+--
+-- Notes:
+--  * ENGINE=InnoDB gives us transactions (COMMIT / ROLLBACK), row locks
+--    and FOREIGN KEY checks.
+--  * Money columns are DECIMAL(15,2): exact values with 2 decimal places
+--    (paise). Java reads them as java.math.BigDecimal - never float/double.
 -- =====================================================================
 
 CREATE TABLE IF NOT EXISTS customers (
-    customer_id  TEXT PRIMARY KEY,
-    name         TEXT    NOT NULL,
-    age          INTEGER NOT NULL CHECK (age BETWEEN 18 AND 100),
-    email        TEXT    NOT NULL UNIQUE,
-    phone        TEXT    NOT NULL,
-    address      TEXT    NOT NULL
-);
+    customer_id  VARCHAR(10)  NOT NULL,
+    name         VARCHAR(50)  NOT NULL,
+    age          INT          NOT NULL,
+    email        VARCHAR(100) NOT NULL,
+    phone        VARCHAR(15)  NOT NULL,
+    address      VARCHAR(100) NOT NULL,
+    CONSTRAINT pk_customers PRIMARY KEY (customer_id),
+    CONSTRAINT uq_customers_email UNIQUE (email),
+    CONSTRAINT chk_customers_age CHECK (age BETWEEN 18 AND 100)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS accounts (
-    account_number  TEXT PRIMARY KEY,
-    customer_id     TEXT NOT NULL,
-    account_type    TEXT NOT NULL CHECK (account_type IN ('SAVINGS', 'CURRENT')),
-    balance         TEXT NOT NULL DEFAULT '0.00' CHECK (CAST(balance AS REAL) >= 0),
-    account_status  TEXT NOT NULL DEFAULT 'ACTIVE' CHECK (account_status IN ('ACTIVE', 'CLOSED')),
-    creation_date   TEXT NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
+    account_number  VARCHAR(12)   NOT NULL,
+    customer_id     VARCHAR(10)   NOT NULL,
+    account_type    VARCHAR(10)   NOT NULL,
+    balance         DECIMAL(15,2) NOT NULL DEFAULT 0.00,
+    account_status  VARCHAR(10)   NOT NULL DEFAULT 'ACTIVE',
+    creation_date   DATE          NOT NULL,
+    CONSTRAINT pk_accounts PRIMARY KEY (account_number),
+    CONSTRAINT chk_accounts_type CHECK (account_type IN ('SAVINGS', 'CURRENT')),
+    CONSTRAINT chk_accounts_balance CHECK (balance >= 0),
+    CONSTRAINT chk_accounts_status CHECK (account_status IN ('ACTIVE', 'CLOSED')),
+    INDEX idx_accounts_customer (customer_id),
+    CONSTRAINT fk_accounts_customer FOREIGN KEY (customer_id)
+        REFERENCES customers (customer_id)
         ON UPDATE CASCADE
         ON DELETE RESTRICT
-);
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 CREATE TABLE IF NOT EXISTS transactions (
-    transaction_id    INTEGER PRIMARY KEY AUTOINCREMENT,
-    account_number    TEXT NOT NULL,
-    transaction_type  TEXT NOT NULL CHECK (transaction_type IN ('DEPOSIT', 'WITHDRAWAL', 'TRANSFER_IN', 'TRANSFER_OUT')),
-    amount            TEXT NOT NULL CHECK (CAST(amount AS REAL) > 0),
-    transaction_date  TEXT NOT NULL,
-    description       TEXT,
-    status            TEXT NOT NULL DEFAULT 'SUCCESS' CHECK (status IN ('SUCCESS', 'FAILED')),
-    reference_id      TEXT NOT NULL,
-    FOREIGN KEY (account_number) REFERENCES accounts (account_number)
+    transaction_id    INT           NOT NULL AUTO_INCREMENT,
+    account_number    VARCHAR(12)   NOT NULL,
+    transaction_type  VARCHAR(15)   NOT NULL,
+    amount            DECIMAL(15,2) NOT NULL,
+    transaction_date  DATETIME      NOT NULL,
+    description       VARCHAR(255),
+    status            VARCHAR(10)   NOT NULL DEFAULT 'SUCCESS',
+    reference_id      VARCHAR(40)   NOT NULL,
+    CONSTRAINT pk_transactions PRIMARY KEY (transaction_id),
+    CONSTRAINT chk_transactions_type CHECK (transaction_type IN ('DEPOSIT', 'WITHDRAWAL', 'TRANSFER_IN', 'TRANSFER_OUT')),
+    CONSTRAINT chk_transactions_amount CHECK (amount > 0),
+    CONSTRAINT chk_transactions_status CHECK (status IN ('SUCCESS', 'FAILED')),
+    INDEX idx_transactions_account (account_number),
+    INDEX idx_transactions_type (transaction_type),
+    INDEX idx_transactions_ref (reference_id),
+    CONSTRAINT fk_transactions_account FOREIGN KEY (account_number)
+        REFERENCES accounts (account_number)
         ON DELETE RESTRICT
-);
-
--- Indexes make common searches faster
-CREATE INDEX IF NOT EXISTS idx_accounts_customer     ON accounts (customer_id);
-CREATE INDEX IF NOT EXISTS idx_transactions_account  ON transactions (account_number);
-CREATE INDEX IF NOT EXISTS idx_transactions_type     ON transactions (transaction_type);
-CREATE INDEX IF NOT EXISTS idx_transactions_ref      ON transactions (reference_id);
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;

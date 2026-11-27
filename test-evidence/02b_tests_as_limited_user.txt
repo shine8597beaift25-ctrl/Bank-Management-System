@@ -1,0 +1,79 @@
+=== BANK MANAGEMENT SYSTEM - AUTOMATED TESTS ===
+Test database: MySQL database bank_management_test on localhost:3306 (user bankuser)
+
+--- Customer management ---
+PASS  TC01 Register customer and search by ID (lower-case input)  [Aarav Sharma]
+PASS  TC02 Name cleaned to Title Case, email lower-cased, phone spaces removed  [Aarav Sharma|aarav@example.com|9876543210]
+PASS  TC03 Duplicate customer ID is rejected  [DuplicateCustomerException]
+PASS  TC04 Duplicate email is rejected  [DuplicateCustomerException]
+PASS  TC05 Age below 18 is rejected  [IllegalArgumentException]
+PASS  TC06 Invalid phone is rejected  [IllegalArgumentException]
+PASS  TC07 Invalid email is rejected  [IllegalArgumentException]
+PASS  TC08 Search for unknown customer throws CustomerNotFoundException  [CustomerNotFoundException]
+PASS  TC09 Update customer address  [99 New Address, Kolkata]
+PASS  TC10 Suggest next customer ID  [C1004]
+--- Account management ---
+PASS  TC11 Open savings account gets SB number and SavingsAccount class  [SB1001|SavingsAccount|10000.00]
+PASS  TC12 Open current account gets CA number and CurrentAccount class  [CA1002|CurrentAccount]
+PASS  TC13 Second active savings account for same customer is rejected  [DuplicateAccountException]
+PASS  TC14 Opening deposit below minimum is rejected  [InvalidAmountException]
+PASS  TC15 Account for unknown customer is rejected  [CustomerNotFoundException]
+PASS  TC16 Opening deposit saved as a DEPOSIT transaction  [1]
+PASS  TC17 Search unknown account throws AccountNotFoundException  [AccountNotFoundException]
+PASS  TC18 Savings interest (4% of 10,000) via polymorphism  [400.00]
+--- Deposit and withdrawal ---
+PASS  TC19 Deposit updates balance  [12500.50]
+PASS  TC20 Deposit is saved in the database  [12500.50]
+PASS  TC21 Zero deposit rejected  [InvalidAmountException]
+PASS  TC22 Negative amount rejected  [InvalidAmountException]
+PASS  TC23 Non-numeric amount rejected  [InvalidAmountException]
+PASS  TC24 More than 2 decimal places rejected  [InvalidAmountException]
+PASS  TC25 Withdrawal updates balance  [10500.50]
+PASS  TC26 Withdrawal above balance throws InsufficientBalanceException  [InsufficientBalanceException]
+PASS  TC27 Balance unchanged after refused withdrawal  [500.00]
+PASS  TC28 Refused withdrawal stored with status FAILED  [FAILED]
+PASS  TC29 Savings withdrawal above Rs. 50,000 limit rejected  [InvalidAmountException]
+--- Money transfer ---
+PASS  TC30 Transfer debits sender  [69000.25]
+PASS  TC31 Transfer credits receiver  [6500.25]
+PASS  TC32 Transfer creates TRANSFER_OUT and TRANSFER_IN with the same reference  [TRANSFER_OUT,TRANSFER_IN]
+PASS  TC33 Transfer to the same account rejected  [IllegalArgumentException]
+PASS  TC34 Transfer with insufficient balance rejected  [InsufficientBalanceException]
+PASS  TC35 Sender unchanged after refused transfer  [500.00]
+PASS  TC36 Transfer to unknown account rejected  [AccountNotFoundException]
+SKIP  TC37-TC40 rollback test: this MySQL user may not create triggers ((conn=1458) You do not have the SUPER privilege and binary logging is enabled (you *might* want to use the less safe log_bin_trust_function_creators variable)). Run the tests as root, or set log_bin_trust_function_creators=1.
+--- Close account and delete customer ---
+PASS  TC41 Closing an account with money is rejected  [IllegalStateException]
+PASS  TC42 Account with zero balance can be closed  [CLOSED]
+PASS  TC43 Deposit into closed account rejected  [IllegalStateException]
+PASS  TC44 Transfer into closed account rejected  [IllegalStateException]
+PASS  TC45 Customer with accounts cannot be deleted  [IllegalStateException]
+PASS  TC46 Customer without accounts can be deleted  [false]
+--- CSV import / export ---
+PASS  TC47 Exported customers can be read back (address with comma kept)  [3|12 MG Road, Bengaluru]
+PASS  TC48 Invalid customer CSV: 1 imported, 7 problems reported  [1|7]
+PASS  TC49 Invalid account CSV: 1 imported, 8 problems reported  [1|8]
+PASS  TC50 Account numbers continue after imported SB2001  [SB2002]
+PASS  TC51 StreamTokenizer counts 10 lines in accounts_sample.csv  [10]
+--- Reports (streams) ---
+PASS  TC52 Report: total customers  [4]
+PASS  TC53 Report: total active accounts  [4]
+PASS  TC54 Top accounts sorted highest first and at most 5  [true]
+PASS  TC55 Customers alphabetical: first is Aarav Sharma  [Aarav Sharma]
+PASS  TC56 Generic sumBalances equals manual total  [81300.50]
+--- Concurrency ---
+PASS  TC57 4 threads x 25 deposits of Rs. 10: no lost updates  [7500.25]
+PASS  TC58 All 100 concurrent deposits recorded  [100]
+PASS  TC65 Deposit waits while another connection holds a FOR UPDATE row lock (>= 700 ms)  [true]
+PASS  TC66 Deposit completes correctly after the lock is released  [69001.25]
+PASS  TC67 DATE column round-trip: new account opened today  [2026-11-27]
+--- Database constraints ---
+PASS  TC61 DB CHECK rule refuses a negative balance  [SQLException]
+PASS  TC62 DB FOREIGN KEY refuses an account for a missing customer  [SQLException]
+PASS  TC63 DB CHECK rule refuses a zero transaction amount  [SQLException]
+PASS  TC64 DB PRIMARY KEY refuses a duplicate account number  [SQLException]
+--- Persistence ---
+PASS  TC59 Data read back by new objects from the database file  [69001.25]
+PASS  TC60 Closed status persisted  [CLOSED]
+
+=== RESULT: 63 passed, 0 failed, 1 skipped ===

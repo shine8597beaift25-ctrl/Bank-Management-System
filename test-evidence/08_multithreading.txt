@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -38,9 +38,9 @@ Thread Lifecycle, sleep(), join(), Priority, interrupt()
 ----------------------------------------------------
 State before start() : NEW
 Priorities           : Runnable-Worker=10, Thread-Subclass=1 (only a hint to the scheduler)
-   [Runnable-Worker] step 1
 State after start()  : RUNNABLE
    [Thread-Subclass] countdown 3
+   [Runnable-Worker] step 1
 State while sleeping : TIMED_WAITING
    [Thread-Subclass] countdown 2
    [Runnable-Worker] step 2
@@ -73,7 +73,7 @@ Enter Your Choice:
 +----------------------------------+-------------+----------------------------+
 | Approach                         | Final Total | Result                     |
 +----------------------------------+-------------+----------------------------+
-| No synchronization (race cond... | 385697      | WRONG (lost 14303 updates) |
+| No synchronization (race cond... | 384075      | WRONG (lost 15925 updates) |
 | synchronized method              | 400000      | Correct                    |
 | synchronized block               | 400000      | Correct                    |
 | AtomicInteger (atomic operation) | 400000      | Correct                    |
@@ -99,7 +99,7 @@ Enter Your Choice:
 ----------------------------------------------------
 Main thread sets keepWorking = false
    [Worker] saw keepWorking = false and stopped.
-[SUCCESS] Worker stopped after 40,512,743 loops. Without 'volatile' the worker might keep a cached copy and never stop.
+[SUCCESS] Worker stopped after 33,104,349 loops. Without 'volatile' the worker might keep a cached copy and never stop.
 
 ====================================================
             MULTITHREADING DEMONSTRATION
@@ -119,11 +119,11 @@ Main thread waits (wait/notify) until the first report is ready...
 First report is ready. Main thread continues its own work.
 
 ReportThread activity log:
-23:06:03.786  started (daemon=true, priority=1)
-23:06:03.810  report #1 saved to data/reports/background_report.txt
-23:06:04.216  report #2 saved to data/reports/background_report.txt
-23:06:04.621  report #3 saved to data/reports/background_report.txt
-23:06:04.810  interrupted while sleeping - stopping
+23:53:41.293  started (daemon=true, priority=1)
+23:53:41.365  report #1 saved to data/reports/background_report.txt
+23:53:41.785  report #2 saved to data/reports/background_report.txt
+23:53:42.222  report #3 saved to data/reports/background_report.txt
+23:53:42.366  interrupted while sleeping - stopping
 [SUCCESS] 3 report(s) generated. Latest saved in data/reports/background_report.txt
 
 ====================================================
@@ -143,28 +143,36 @@ Account number to use: Continue? (y/n):
    Producer-Consumer: Concurrent Banking Requests
 ----------------------------------------------------
 Account SB1006 starting balance: Rs. 315,000.75
-   [Branch-Counter] submitted Request #1 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
    [ATM] submitted Request #2 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Branch-Counter] submitted Request #1 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Branch-Counter] submitted Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [ATM] submitted Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
    [Consumer-1] processed Request #1 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
    [Consumer-2] processed Request #2 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
-   [Branch-Counter] submitted Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
-   [Consumer-1] processed Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
-   [ATM] submitted Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
-   [Consumer-2] processed Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
    [Branch-Counter] submitted Request #5 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
-   [Consumer-1] processed Request #5 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Queue] Full (3 items). ATM waits...
+   [Queue] Full (3 items). Branch-Counter waits...
    [ATM] submitted Request #6 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
-   [Consumer-2] processed Request #6 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Queue] Full (3 items). Branch-Counter waits...
    [Branch-Counter] submitted Request #7 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
-   [Consumer-1] processed Request #7 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-1] processed Request #3 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #4 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Queue] Full (3 items). Branch-Counter waits...
+   [Queue] Full (3 items). ATM waits...
    [Branch-Counter] submitted Request #9 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
-   [Consumer-2] processed Request #9 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Queue] Full (3 items). ATM waits...
    [ATM] submitted Request #8 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
-   [Consumer-1] processed Request #8 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-1] processed Request #5 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #6 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
    [Branch-Counter] finished submitting 5 requests.
+   [Queue] Full (3 items). ATM waits...
    [ATM] submitted Request #10 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
-   [Consumer-2] processed Request #10 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-1] processed Request #7 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
+   [Consumer-2] processed Request #9 [DEPOSIT Rs. 100.00 on SB1006 from Branch-Counter]
    [ATM] finished submitting 5 requests.
+   [Queue] Full (3 items). main waits...
+   [Consumer-1] processed Request #8 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
+   [Consumer-2] processed Request #10 [WITHDRAW Rs. 50.00 on SB1006 from ATM]
    [Consumer-1] received stop signal. Ending.
    [Consumer-2] received stop signal. Ending.
 

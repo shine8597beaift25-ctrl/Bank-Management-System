@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -42,22 +42,22 @@ Enter Your Choice:
 +----+---------------------+---------+--------------+----------------+---------+----------------------------------+------------------------+
 | ID | Date & Time         | Account | Type         | Amount         | Status  | Description                      | Reference              |
 +----+---------------------+---------+--------------+----------------+---------+----------------------------------+------------------------+
-| 1  | 2026-11-20 23:02:41 | SB1001  | Deposit      | Rs. 25,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-001 |
-| 2  | 2026-11-20 23:02:41 | CA1002  | Deposit      | Rs. 150,000.00 | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-002 |
-| 3  | 2026-11-20 23:02:41 | SB1003  | Deposit      | Rs. 48,250.50  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-003 |
-| 4  | 2026-11-20 23:02:41 | SB1004  | Deposit      | Rs. 7,800.00   | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-004 |
-| 5  | 2026-11-20 23:02:41 | CA1005  | Deposit      | Rs. 92,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-005 |
-| 6  | 2026-11-20 23:02:41 | SB1006  | Deposit      | Rs. 315,000.75 | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-006 |
-| 7  | 2026-11-20 23:02:41 | SB1007  | Deposit      | Rs. 1,200.00   | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-007 |
-| 8  | 2026-11-20 23:02:41 | CA1008  | Deposit      | Rs. 64,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261120230241-008 |
-| 9  | 2026-11-20 23:05:12 | SB1010  | Deposit      | Rs. 2,000.00   | SUCCESS | Opening deposit                  | OPN-20261120230512-001 |
-| 10 | 2026-11-20 23:05:12 | CA1011  | Deposit      | Rs. 5,000.00   | SUCCESS | Opening deposit                  | OPN-20261120230512-002 |
-| 11 | 2026-11-20 23:05:12 | SB1010  | Deposit      | Rs. 2,500.50   | SUCCESS | Cash deposit                     | DEP-20261120230512-003 |
-| 12 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 10,000.00  | FAILED  | Refused: insufficient balance    | WDL-20261120230512-005 |
-| 13 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 800.00     | SUCCESS | Cash withdrawal                  | WDL-20261120230512-007 |
-| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00   | SUCCESS | Transfer to CA1005               | TRF-20261120230512-008 |
-| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In  | Rs. 5,000.00   | SUCCESS | Transfer from SB1001             | TRF-20261120230512-008 |
-| 16 | 2026-11-20 23:05:12 | SB1007  | Transfer Out | Rs. 5,000.00   | FAILED  | Refused transfer to SB1001: i... | TRF-20261120230512-009 |
+| 1  | 2026-11-27 23:53:27 | SB1001  | Deposit      | Rs. 25,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-001 |
+| 2  | 2026-11-27 23:53:27 | CA1002  | Deposit      | Rs. 150,000.00 | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-002 |
+| 3  | 2026-11-27 23:53:27 | SB1003  | Deposit      | Rs. 48,250.50  | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-003 |
+| 4  | 2026-11-27 23:53:27 | SB1004  | Deposit      | Rs. 7,800.00   | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-004 |
+| 5  | 2026-11-27 23:53:27 | CA1005  | Deposit      | Rs. 92,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-005 |
+| 6  | 2026-11-27 23:53:27 | SB1006  | Deposit      | Rs. 315,000.75 | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-006 |
+| 7  | 2026-11-27 23:53:27 | SB1007  | Deposit      | Rs. 1,200.00   | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-007 |
+| 8  | 2026-11-27 23:53:27 | CA1008  | Deposit      | Rs. 64,000.00  | SUCCESS | Opening balance (CSV import)     | IMP-20261127235327-008 |
+| 9  | 2026-11-27 23:53:28 | SB1010  | Deposit      | Rs. 2,000.00   | SUCCESS | Opening deposit                  | OPN-20261127235328-001 |
+| 10 | 2026-11-27 23:53:28 | CA1011  | Deposit      | Rs. 5,000.00   | SUCCESS | Opening deposit                  | OPN-20261127235328-002 |
+| 11 | 2026-11-27 23:53:28 | SB1010  | Deposit      | Rs. 2,500.50   | SUCCESS | Cash deposit                     | DEP-20261127235328-003 |
+| 12 | 2026-11-27 23:53:28 | SB1004  | Withdrawal   | Rs. 10,000.00  | FAILED  | Refused: insufficient balance    | WDL-20261127235328-004 |
+| 13 | 2026-11-27 23:53:28 | SB1004  | Withdrawal   | Rs. 800.00     | SUCCESS | Cash withdrawal                  | WDL-20261127235328-006 |
+| 14 | 2026-11-27 23:53:28 | SB1001  | Transfer Out | Rs. 5,000.00   | SUCCESS | Transfer to CA1005               | TRF-20261127235328-007 |
+| 15 | 2026-11-27 23:53:28 | CA1005  | Transfer In  | Rs. 5,000.00   | SUCCESS | Transfer from SB1001             | TRF-20261127235328-007 |
+| 16 | 2026-11-27 23:53:28 | SB1007  | Transfer Out | Rs. 5,000.00   | FAILED  | Refused transfer to SB1001: i... | TRF-20261127235328-008 |
 +----+---------------------+---------+--------------+----------------+---------+----------------------------------+------------------------+
 Total records: 16
 
@@ -81,8 +81,8 @@ Enter Your Choice: Account number:
 +----+---------------------+---------+--------------+---------------+---------+------------------------------+------------------------+
 | ID | Date & Time         | Account | Type         | Amount        | Status  | Description                  | Reference              |
 +----+---------------------+---------+--------------+---------------+---------+------------------------------+------------------------+
-| 1  | 2026-11-20 23:02:41 | SB1001  | Deposit      | Rs. 25,000.00 | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-001 |
-| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00  | SUCCESS | Transfer to CA1005           | TRF-20261120230512-008 |
+| 1  | 2026-11-27 23:53:27 | SB1001  | Deposit      | Rs. 25,000.00 | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-001 |
+| 14 | 2026-11-27 23:53:28 | SB1001  | Transfer Out | Rs. 5,000.00  | SUCCESS | Transfer to CA1005           | TRF-20261127235328-007 |
 +----+---------------------+---------+--------------+---------------+---------+------------------------------+------------------------+
 Total records: 2
 
@@ -106,17 +106,17 @@ Enter Your Choice: Account number (press Enter for all accounts):
 +----+---------------------+---------+---------+----------------+---------+------------------------------+------------------------+
 | ID | Date & Time         | Account | Type    | Amount         | Status  | Description                  | Reference              |
 +----+---------------------+---------+---------+----------------+---------+------------------------------+------------------------+
-| 1  | 2026-11-20 23:02:41 | SB1001  | Deposit | Rs. 25,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-001 |
-| 2  | 2026-11-20 23:02:41 | CA1002  | Deposit | Rs. 150,000.00 | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-002 |
-| 3  | 2026-11-20 23:02:41 | SB1003  | Deposit | Rs. 48,250.50  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-003 |
-| 4  | 2026-11-20 23:02:41 | SB1004  | Deposit | Rs. 7,800.00   | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-004 |
-| 5  | 2026-11-20 23:02:41 | CA1005  | Deposit | Rs. 92,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-005 |
-| 6  | 2026-11-20 23:02:41 | SB1006  | Deposit | Rs. 315,000.75 | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-006 |
-| 7  | 2026-11-20 23:02:41 | SB1007  | Deposit | Rs. 1,200.00   | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-007 |
-| 8  | 2026-11-20 23:02:41 | CA1008  | Deposit | Rs. 64,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261120230241-008 |
-| 9  | 2026-11-20 23:05:12 | SB1010  | Deposit | Rs. 2,000.00   | SUCCESS | Opening deposit              | OPN-20261120230512-001 |
-| 10 | 2026-11-20 23:05:12 | CA1011  | Deposit | Rs. 5,000.00   | SUCCESS | Opening deposit              | OPN-20261120230512-002 |
-| 11 | 2026-11-20 23:05:12 | SB1010  | Deposit | Rs. 2,500.50   | SUCCESS | Cash deposit                 | DEP-20261120230512-003 |
+| 1  | 2026-11-27 23:53:27 | SB1001  | Deposit | Rs. 25,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-001 |
+| 2  | 2026-11-27 23:53:27 | CA1002  | Deposit | Rs. 150,000.00 | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-002 |
+| 3  | 2026-11-27 23:53:27 | SB1003  | Deposit | Rs. 48,250.50  | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-003 |
+| 4  | 2026-11-27 23:53:27 | SB1004  | Deposit | Rs. 7,800.00   | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-004 |
+| 5  | 2026-11-27 23:53:27 | CA1005  | Deposit | Rs. 92,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-005 |
+| 6  | 2026-11-27 23:53:27 | SB1006  | Deposit | Rs. 315,000.75 | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-006 |
+| 7  | 2026-11-27 23:53:27 | SB1007  | Deposit | Rs. 1,200.00   | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-007 |
+| 8  | 2026-11-27 23:53:27 | CA1008  | Deposit | Rs. 64,000.00  | SUCCESS | Opening balance (CSV import) | IMP-20261127235327-008 |
+| 9  | 2026-11-27 23:53:28 | SB1010  | Deposit | Rs. 2,000.00   | SUCCESS | Opening deposit              | OPN-20261127235328-001 |
+| 10 | 2026-11-27 23:53:28 | CA1011  | Deposit | Rs. 5,000.00   | SUCCESS | Opening deposit              | OPN-20261127235328-002 |
+| 11 | 2026-11-27 23:53:28 | SB1010  | Deposit | Rs. 2,500.50   | SUCCESS | Cash deposit                 | DEP-20261127235328-003 |
 +----+---------------------+---------+---------+----------------+---------+------------------------------+------------------------+
 Total records: 11
 
@@ -140,8 +140,8 @@ Enter Your Choice: Account number (press Enter for all accounts):
 +----+---------------------+---------+------------+---------------+---------+-------------------------------+------------------------+
 | ID | Date & Time         | Account | Type       | Amount        | Status  | Description                   | Reference              |
 +----+---------------------+---------+------------+---------------+---------+-------------------------------+------------------------+
-| 12 | 2026-11-20 23:05:12 | SB1004  | Withdrawal | Rs. 10,000.00 | FAILED  | Refused: insufficient balance | WDL-20261120230512-005 |
-| 13 | 2026-11-20 23:05:12 | SB1004  | Withdrawal | Rs. 800.00    | SUCCESS | Cash withdrawal               | WDL-20261120230512-007 |
+| 12 | 2026-11-27 23:53:28 | SB1004  | Withdrawal | Rs. 10,000.00 | FAILED  | Refused: insufficient balance | WDL-20261127235328-004 |
+| 13 | 2026-11-27 23:53:28 | SB1004  | Withdrawal | Rs. 800.00    | SUCCESS | Cash withdrawal               | WDL-20261127235328-006 |
 +----+---------------------+---------+------------+---------------+---------+-------------------------------+------------------------+
 Total records: 2
 
@@ -165,7 +165,7 @@ Enter Your Choice: Account number (press Enter for all accounts):
 +----+---------------------+---------+-------------+--------------+---------+----------------------+------------------------+
 | ID | Date & Time         | Account | Type        | Amount       | Status  | Description          | Reference              |
 +----+---------------------+---------+-------------+--------------+---------+----------------------+------------------------+
-| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In | Rs. 5,000.00 | SUCCESS | Transfer from SB1001 | TRF-20261120230512-008 |
+| 15 | 2026-11-27 23:53:28 | CA1005  | Transfer In | Rs. 5,000.00 | SUCCESS | Transfer from SB1001 | TRF-20261127235328-007 |
 +----+---------------------+---------+-------------+--------------+---------+----------------------+------------------------+
 Total records: 1
 
@@ -189,7 +189,7 @@ Enter Your Choice: Account number (press Enter for all accounts):
 +----+---------------------+---------+--------------+--------------+---------+--------------------+------------------------+
 | ID | Date & Time         | Account | Type         | Amount       | Status  | Description        | Reference              |
 +----+---------------------+---------+--------------+--------------+---------+--------------------+------------------------+
-| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00 | SUCCESS | Transfer to CA1005 | TRF-20261120230512-008 |
+| 14 | 2026-11-27 23:53:28 | SB1001  | Transfer Out | Rs. 5,000.00 | SUCCESS | Transfer to CA1005 | TRF-20261127235328-007 |
 +----+---------------------+---------+--------------+--------------+---------+--------------------+------------------------+
 Total records: 1
 
@@ -213,11 +213,11 @@ Enter Your Choice: How many latest transactions (1-100)?
 +----+---------------------+---------+--------------+---------------+---------+----------------------------------+------------------------+
 | ID | Date & Time         | Account | Type         | Amount        | Status  | Description                      | Reference              |
 +----+---------------------+---------+--------------+---------------+---------+----------------------------------+------------------------+
-| 16 | 2026-11-20 23:05:12 | SB1007  | Transfer Out | Rs. 5,000.00  | FAILED  | Refused transfer to SB1001: i... | TRF-20261120230512-009 |
-| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In  | Rs. 5,000.00  | SUCCESS | Transfer from SB1001             | TRF-20261120230512-008 |
-| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00  | SUCCESS | Transfer to CA1005               | TRF-20261120230512-008 |
-| 13 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 800.00    | SUCCESS | Cash withdrawal                  | WDL-20261120230512-007 |
-| 12 | 2026-11-20 23:05:12 | SB1004  | Withdrawal   | Rs. 10,000.00 | FAILED  | Refused: insufficient balance    | WDL-20261120230512-005 |
+| 16 | 2026-11-27 23:53:28 | SB1007  | Transfer Out | Rs. 5,000.00  | FAILED  | Refused transfer to SB1001: i... | TRF-20261127235328-008 |
+| 15 | 2026-11-27 23:53:28 | CA1005  | Transfer In  | Rs. 5,000.00  | SUCCESS | Transfer from SB1001             | TRF-20261127235328-007 |
+| 14 | 2026-11-27 23:53:28 | SB1001  | Transfer Out | Rs. 5,000.00  | SUCCESS | Transfer to CA1005               | TRF-20261127235328-007 |
+| 13 | 2026-11-27 23:53:28 | SB1004  | Withdrawal   | Rs. 800.00    | SUCCESS | Cash withdrawal                  | WDL-20261127235328-006 |
+| 12 | 2026-11-27 23:53:28 | SB1004  | Withdrawal   | Rs. 10,000.00 | FAILED  | Refused: insufficient balance    | WDL-20261127235328-004 |
 +----+---------------------+---------+--------------+---------------+---------+----------------------------------+------------------------+
 Total records: 5
 
@@ -236,13 +236,13 @@ Total records: 5
 ====================================================
 Enter Your Choice: Reference ID (e.g. TRF-20261120143005-001): 
 ----------------------------------------------------
- Transactions with reference TRF-20261120230512-008
+ Transactions with reference TRF-20261127235328-007
 ----------------------------------------------------
 +----+---------------------+---------+--------------+--------------+---------+----------------------+------------------------+
 | ID | Date & Time         | Account | Type         | Amount       | Status  | Description          | Reference              |
 +----+---------------------+---------+--------------+--------------+---------+----------------------+------------------------+
-| 14 | 2026-11-20 23:05:12 | SB1001  | Transfer Out | Rs. 5,000.00 | SUCCESS | Transfer to CA1005   | TRF-20261120230512-008 |
-| 15 | 2026-11-20 23:05:12 | CA1005  | Transfer In  | Rs. 5,000.00 | SUCCESS | Transfer from SB1001 | TRF-20261120230512-008 |
+| 14 | 2026-11-27 23:53:28 | SB1001  | Transfer Out | Rs. 5,000.00 | SUCCESS | Transfer to CA1005   | TRF-20261127235328-007 |
+| 15 | 2026-11-27 23:53:28 | CA1005  | Transfer In  | Rs. 5,000.00 | SUCCESS | Transfer from SB1001 | TRF-20261127235328-007 |
 +----+---------------------+---------+--------------+--------------+---------+----------------------+------------------------+
 Total records: 2
 
@@ -450,7 +450,7 @@ Total records: 3
 +------------+-------------+--------------+---------+---------------+--------+------------+
 | Account No | Customer ID | Holder Name  | Type    | Balance       | Status | Opened On  |
 +------------+-------------+--------------+---------+---------------+--------+------------+
-| CA1011     | C1002       | Priya Nair   | Current | Rs. 5,000.00  | ACTIVE | 2026-11-20 |
+| CA1011     | C1002       | Priya Nair   | Current | Rs. 5,000.00  | ACTIVE | 2026-11-27 |
 | SB1001     | C1001       | Aarav Sharma | Savings | Rs. 20,000.00 | ACTIVE | 2026-01-10 |
 | SB1003     | C1002       | Priya Nair   | Savings | Rs. 48,250.50 | ACTIVE | 2026-02-03 |
 +------------+-------------+--------------+---------+---------------+--------+------------+
@@ -475,7 +475,7 @@ Total records: 3
 | Account No | Customer ID | Holder Name | Type    | Balance      | Status | Opened On  |
 +------------+-------------+-------------+---------+--------------+--------+------------+
 | SB1009     | C1008       | Fatima Khan | Savings | Rs. 0.00     | CLOSED | 2026-06-14 |
-| SB1010     | C1007       | Karan Patel | Savings | Rs. 4,500.50 | ACTIVE | 2026-11-20 |
+| SB1010     | C1007       | Karan Patel | Savings | Rs. 4,500.50 | ACTIVE | 2026-11-27 |
 +------------+-------------+-------------+---------+--------------+--------+------------+
 Total records: 2
 [N]ext, [P]revious, [Q]uit: [INFO] No more pages in that direction (or unknown command).
@@ -487,7 +487,7 @@ Total records: 2
 | Account No | Customer ID | Holder Name | Type    | Balance      | Status | Opened On  |
 +------------+-------------+-------------+---------+--------------+--------+------------+
 | SB1009     | C1008       | Fatima Khan | Savings | Rs. 0.00     | CLOSED | 2026-06-14 |
-| SB1010     | C1007       | Karan Patel | Savings | Rs. 4,500.50 | ACTIVE | 2026-11-20 |
+| SB1010     | C1007       | Karan Patel | Savings | Rs. 4,500.50 | ACTIVE | 2026-11-27 |
 +------------+-------------+-------------+---------+--------------+--------+------------+
 Total records: 2
 [N]ext, [P]revious, [Q]uit: 
@@ -517,7 +517,7 @@ Total records: 3
 ====================================================
 Enter Your Choice: ============================================================
             Java National Bank - BANKING REPORT
-               Generated: 2026-11-20 23:05:34
+               Generated: 2026-11-27 23:53:38
 ============================================================
 Total registered customers               : 8
 Total accounts (active + closed)         : 11
@@ -550,7 +550,7 @@ CUSTOMERS (ALPHABETICAL)
 - Sneha Reddy               C1004
 - Vikram Singh              C1005
 
-[SUCCESS] Report saved to data/reports/bank_report_20261120_230534.txt
+[SUCCESS] Report saved to data/reports/bank_report_20261127_235338.txt
 
 ====================================================
                   BANKING REPORTS

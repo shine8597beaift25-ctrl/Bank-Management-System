@@ -1,7 +1,6 @@
 out/
 out-test/
 target/
-data/test_bank.db
 *.class
 .idea/
 *.iml
@@ -9,3 +8,18 @@ data/test_bank.db
 .project
 .settings/
 nbproject/private/
+
+# Local database credentials
+db.properties
+
+# MySQL connector
+lib/*.jar
+
+# Generated files
+out/
+out-test/
+target/
+
+# Local backups and reports
+data/backup/
+data/reports/

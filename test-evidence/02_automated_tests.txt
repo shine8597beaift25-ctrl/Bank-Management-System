@@ -1,6 +1,6 @@
 Build successful. Run the program with ./run.sh
 === BANK MANAGEMENT SYSTEM - AUTOMATED TESTS ===
-Test database: data/test_bank.db
+Test database: MySQL database bank_management_test on localhost:3306 (user root)
 
 --- Customer management ---
 PASS  TC01 Register customer and search by ID (lower-case input)  [Aarav Sharma]
@@ -42,7 +42,7 @@ PASS  TC33 Transfer to the same account rejected  [IllegalArgumentException]
 PASS  TC34 Transfer with insufficient balance rejected  [InsufficientBalanceException]
 PASS  TC35 Sender unchanged after refused transfer  [500.00]
 PASS  TC36 Transfer to unknown account rejected  [AccountNotFoundException]
-PASS  TC37 Failure while crediting receiver raises an error  [SQLiteException]
+PASS  TC37 Failure while crediting receiver raises an error  [SQLException: Simulated failure while crediting receiver]
 PASS  TC38 ROLLBACK: sender balance restored after failed credit  [69000.25]
 PASS  TC39 ROLLBACK: receiver balance unchanged  [6500.25]
 PASS  TC40 ROLLBACK: no TRANSFER_OUT row left behind  [10]
@@ -68,13 +68,16 @@ PASS  TC56 Generic sumBalances equals manual total  [81300.50]
 --- Concurrency ---
 PASS  TC57 4 threads x 25 deposits of Rs. 10: no lost updates  [7500.25]
 PASS  TC58 All 100 concurrent deposits recorded  [100]
+PASS  TC65 Deposit waits while another connection holds a FOR UPDATE row lock (>= 700 ms)  [true]
+PASS  TC66 Deposit completes correctly after the lock is released  [69001.25]
+PASS  TC67 DATE column round-trip: new account opened today  [2026-11-27]
 --- Database constraints ---
 PASS  TC61 DB CHECK rule refuses a negative balance  [SQLException]
 PASS  TC62 DB FOREIGN KEY refuses an account for a missing customer  [SQLException]
 PASS  TC63 DB CHECK rule refuses a zero transaction amount  [SQLException]
 PASS  TC64 DB PRIMARY KEY refuses a duplicate account number  [SQLException]
 --- Persistence ---
-PASS  TC59 Data read back by new objects from the database file  [69000.25]
+PASS  TC59 Data read back by new objects from the database file  [69001.25]
 PASS  TC60 Closed status persisted  [CLOSED]
 
-=== RESULT: 64 passed, 0 failed ===
+=== RESULT: 67 passed, 0 failed ===

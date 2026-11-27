@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -60,9 +60,9 @@ Enter Your Choice: Enter account number:
 Account Number    : SB1006
 Account Holder    : Vikram Singh
 Account Type      : Savings
-Available Balance : Rs. 315,500.75
+Available Balance : Rs. 315,250.75
 Account Status    : ACTIVE
-Yearly Interest   : Rs. 12,620.03 (estimate)
+Yearly Interest   : Rs. 12,610.03 (estimate)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -96,7 +96,7 @@ Customer ID      : C1002
 Account Holder   : Priya Nair
 Balance          : Rs. 5,000.00
 Status           : ACTIVE
-Opened On        : 2026-11-20
+Opened On        : 2026-11-27
 Withdrawal Limit : Rs. 200,000.00
 Interest Rate    : Not applicable (current account)
 Overdraft        : Not allowed

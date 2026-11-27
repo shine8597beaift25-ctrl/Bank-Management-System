@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM

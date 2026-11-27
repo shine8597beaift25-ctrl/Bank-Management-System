@@ -38,6 +38,8 @@ public class AccountRepository implements DataRepository<BankAccount, String> {
             "INSERT INTO accounts (account_number, customer_id, account_type, balance, account_status, creation_date) "
             + "VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID_SQL = SELECT_BASE + "WHERE a.account_number = ?";
+    /** FOR UPDATE locks the account row until COMMIT/ROLLBACK, so no other connection can change it meanwhile. */
+    private static final String SELECT_BY_ID_FOR_UPDATE_SQL = SELECT_BY_ID_SQL + " FOR UPDATE";
     private static final String SELECT_ALL_SQL = SELECT_BASE + "ORDER BY a.account_number";
     private static final String SELECT_BY_CUSTOMER_SQL = SELECT_BASE + "WHERE a.customer_id = ? ORDER BY a.account_number";
     private static final String SELECT_ACTIVE_BY_CUSTOMER_AND_TYPE_SQL =
@@ -62,9 +64,9 @@ public class AccountRepository implements DataRepository<BankAccount, String> {
             statement.setString(1, account.getAccountNumber());
             statement.setString(2, account.getCustomerId());
             statement.setString(3, account.getAccountType().name());
-            statement.setString(4, account.getBalance().toPlainString());   // exact text, e.g. "1500.00"
+            statement.setBigDecimal(4, account.getBalance());          // DECIMAL(15,2) <-> BigDecimal, exact
             statement.setString(5, account.getStatus().name());
-            statement.setString(6, account.getCreationDate().toString());
+            statement.setObject(6, account.getCreationDate());         // JDBC 4.2: LocalDate -> DATE
             statement.executeUpdate();
         }
     }
@@ -79,7 +81,20 @@ public class AccountRepository implements DataRepository<BankAccount, String> {
     }
 
     public Optional<BankAccount> findById(Connection connection, String accountNumber) throws SQLException {
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_BY_ID_SQL)) {
+        return findOne(connection, SELECT_BY_ID_SQL, accountNumber);
+    }
+
+    /**
+     * Reads AND LOCKS the account row (SELECT ... FOR UPDATE). Must be called inside a
+     * database transaction (autoCommit = false). The lock is released at commit() or rollback().
+     * This protects the balance even if two copies of the program run at the same time.
+     */
+    public Optional<BankAccount> findByIdForUpdate(Connection connection, String accountNumber) throws SQLException {
+        return findOne(connection, SELECT_BY_ID_FOR_UPDATE_SQL, accountNumber);
+    }
+
+    private Optional<BankAccount> findOne(Connection connection, String sql, String accountNumber) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, accountNumber);
             List<BankAccount> found = readAll(statement);
             return found.isEmpty() ? Optional.empty() : Optional.of(found.get(0));
@@ -148,7 +163,7 @@ public class AccountRepository implements DataRepository<BankAccount, String> {
     /** Returns the number of rows changed (1 = success, 0 = account missing). */
     public int updateBalance(Connection connection, String accountNumber, BigDecimal newBalance) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_BALANCE_SQL)) {
-            statement.setString(1, newBalance.toPlainString());
+            statement.setBigDecimal(1, newBalance);
             statement.setString(2, accountNumber);
             return statement.executeUpdate();
         }
@@ -183,8 +198,8 @@ public class AccountRepository implements DataRepository<BankAccount, String> {
                 resultSet.getString("account_number"),
                 resultSet.getString("customer_id"),
                 resultSet.getString("holder_name"),
-                new BigDecimal(resultSet.getString("balance")),   // TEXT -> exact BigDecimal
-                LocalDate.parse(resultSet.getString("creation_date")),
+                resultSet.getBigDecimal("balance"),                       // DECIMAL -> exact BigDecimal
+                resultSet.getObject("creation_date", LocalDate.class),    // DATE -> LocalDate (JDBC 4.2)
                 AccountStatus.fromText(resultSet.getString("account_status")));
     }
 }

@@ -1,0 +1,73 @@
++-------------------------+
+| mysql_version           |
++-------------------------+
+| 8.0.46-0ubuntu0.24.04.5 |
++-------------------------+
++---------------------------+
+| Tables_in_bank_management |
++---------------------------+
+| accounts                  |
+| customers                 |
+| transactions              |
++---------------------------+
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| customer_id | varchar(10)  | NO   | PRI | NULL    |       |
+| name        | varchar(50)  | NO   |     | NULL    |       |
+| age         | int          | NO   |     | NULL    |       |
+| email       | varchar(100) | NO   | UNI | NULL    |       |
+| phone       | varchar(15)  | NO   |     | NULL    |       |
+| address     | varchar(100) | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| account_number | varchar(12)   | NO   | PRI | NULL    |       |
+| customer_id    | varchar(10)   | NO   | MUL | NULL    |       |
+| account_type   | varchar(10)   | NO   |     | NULL    |       |
+| balance        | decimal(15,2) | NO   |     | 0.00    |       |
+| account_status | varchar(10)   | NO   |     | ACTIVE  |       |
+| creation_date  | date          | NO   |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
++------------------+---------------+------+-----+---------+----------------+
+| Field            | Type          | Null | Key | Default | Extra          |
++------------------+---------------+------+-----+---------+----------------+
+| transaction_id   | int           | NO   | PRI | NULL    | auto_increment |
+| account_number   | varchar(12)   | NO   | MUL | NULL    |                |
+| transaction_type | varchar(15)   | NO   | MUL | NULL    |                |
+| amount           | decimal(15,2) | NO   |     | NULL    |                |
+| transaction_date | datetime      | NO   |     | NULL    |                |
+| description      | varchar(255)  | YES  |     | NULL    |                |
+| status           | varchar(10)   | NO   |     | SUCCESS |                |
+| reference_id     | varchar(40)   | NO   | MUL | NULL    |                |
++------------------+---------------+------+-----+---------+----------------+
++-------------------------+--------------+-----------------+
+| CONSTRAINT_NAME         | TABLE_NAME   | CONSTRAINT_TYPE |
++-------------------------+--------------+-----------------+
+| chk_accounts_balance    | accounts     | CHECK           |
+| chk_accounts_status     | accounts     | CHECK           |
+| chk_accounts_type       | accounts     | CHECK           |
+| fk_accounts_customer    | accounts     | FOREIGN KEY     |
+| PRIMARY                 | accounts     | PRIMARY KEY     |
+| chk_customers_age       | customers    | CHECK           |
+| PRIMARY                 | customers    | PRIMARY KEY     |
+| uq_customers_email      | customers    | UNIQUE          |
+| chk_transactions_amount | transactions | CHECK           |
+| chk_transactions_status | transactions | CHECK           |
+| chk_transactions_type   | transactions | CHECK           |
+| fk_transactions_account | transactions | FOREIGN KEY     |
+| PRIMARY                 | transactions | PRIMARY KEY     |
++-------------------------+--------------+-----------------+
++--------------+--------------------------+------------------+
+| TABLE_NAME   | INDEX_NAME               | COLUMN_NAME      |
++--------------+--------------------------+------------------+
+| accounts     | idx_accounts_customer    | customer_id      |
+| accounts     | PRIMARY                  | account_number   |
+| customers    | PRIMARY                  | customer_id      |
+| customers    | uq_customers_email       | email            |
+| transactions | idx_transactions_account | account_number   |
+| transactions | idx_transactions_ref     | reference_id     |
+| transactions | idx_transactions_type    | transaction_type |
+| transactions | PRIMARY                  | transaction_id   |
++--------------+--------------------------+------------------+

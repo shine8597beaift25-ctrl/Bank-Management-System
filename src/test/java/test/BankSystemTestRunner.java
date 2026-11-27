@@ -37,13 +37,16 @@ import java.util.Map;
  * Automated checks for the core banking logic. Plain Java (no test framework needed).
  *
  * Run with:  ./run-tests.sh   (or run-tests.bat on Windows)
- * It uses a SEPARATE database (data/test_bank.db), so your real data is never touched.
+ * It uses a SEPARATE MySQL database (bank_management_test), which it deletes and re-creates
+ * at the start of every run, so your real data is never touched.
+ * The MySQL user in db.properties needs permission to create databases and triggers.
  * Each check prints PASS or FAIL; the program exits with code 1 if any check fails.
  */
 public class BankSystemTestRunner {
 
     private static int passed;
     private static int failed;
+    private static int skipped;
     private static final List<String> failures = new ArrayList<>();
 
     private static CustomerService customerService;
@@ -59,20 +62,20 @@ public class BankSystemTestRunner {
     }
 
     public static void main(String[] args) throws Exception {
-        File testDatabase = new File(DatabaseManager.getDatabasePath());
-        if (!testDatabase.getName().startsWith("test_")) {
-            System.out.println("Refusing to run: set -Dbank.db.path=data/test_bank.db so real data is not changed.");
+        String testDatabase = DatabaseManager.getDatabaseName();
+        if (!testDatabase.endsWith("_test")) {
+            System.out.println("Refusing to run: start with -Ddb.name=bank_management_test so real data is not changed.");
             System.exit(2);
         }
-        if (testDatabase.exists() && !testDatabase.delete()) {
-            throw new IllegalStateException("Could not delete old test database " + testDatabase);
+        try (Connection server = DatabaseManager.getServerConnection(); Statement statement = server.createStatement()) {
+            statement.executeUpdate("DROP DATABASE IF EXISTS " + testDatabase);   // start from an empty test database
         }
         DatabaseManager.initialiseDatabase();
         createServices();
         accountService.loadAccountSequence();
 
         System.out.println("=== BANK MANAGEMENT SYSTEM - AUTOMATED TESTS ===");
-        System.out.println("Test database: " + testDatabase.getPath());
+        System.out.println("Test database: " + DatabaseManager.getDatabaseDescription());
         System.out.println();
 
         customerTests();
@@ -87,7 +90,8 @@ public class BankSystemTestRunner {
         persistenceTest();
 
         System.out.println();
-        System.out.println("=== RESULT: " + passed + " passed, " + failed + " failed ===");
+        System.out.println("=== RESULT: " + passed + " passed, " + failed + " failed"
+                + (skipped > 0 ? ", " + skipped + " skipped" : "") + " ===");
         for (String failure : failures) {
             System.out.println("FAILED: " + failure);
         }
@@ -207,10 +211,17 @@ public class BankSystemTestRunner {
                 () -> accountService.transfer("SB1001", "CA9999", new BigDecimal("10.00")));
 
         // ROLLBACK TEST: make the receiver's balance update fail AFTER the sender was debited.
-        // A temporary trigger aborts any update to CA1002. The whole transfer must be undone.
+        // A temporary MySQL trigger refuses any balance change on CA1002. The whole transfer must be undone.
         try (Connection connection = DatabaseManager.getConnection(); Statement statement = connection.createStatement()) {
-            statement.executeUpdate("CREATE TRIGGER fail_receiver_update BEFORE UPDATE OF balance ON accounts "
-                    + "WHEN NEW.account_number = 'CA1002' BEGIN SELECT RAISE(ABORT, 'Simulated failure while crediting receiver'); END");
+            statement.executeUpdate("CREATE TRIGGER fail_receiver_update BEFORE UPDATE ON accounts FOR EACH ROW "
+                    + "BEGIN IF NEW.account_number = 'CA1002' AND NEW.balance <> OLD.balance THEN "
+                    + "SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Simulated failure while crediting receiver'; "
+                    + "END IF; END");
+        } catch (java.sql.SQLException e) {
+            // Creating a trigger needs extra rights when MySQL binary logging is on (root has them).
+            skip("TC37-TC40 rollback test", "this MySQL user may not create triggers (" + e.getMessage()
+                    + "). Run the tests as root, or set log_bin_trust_function_creators=1.");
+            return;
         }
         BigDecimal senderBeforeRollback = accountService.getAccount("SB1001").getBalance();
         BigDecimal receiverBeforeRollback = accountService.getAccount("CA1002").getBalance();
@@ -219,12 +230,17 @@ public class BankSystemTestRunner {
         try {
             accountService.transfer("SB1001", "CA1002", new BigDecimal("700.00"));
         } catch (Exception e) {
-            rollbackError = e.getClass().getSimpleName();
+            // Drivers may add their own prefix to the message, so we only check that our text is inside it
+            boolean expected = e instanceof java.sql.SQLException && String.valueOf(e.getMessage())
+                    .contains("Simulated failure while crediting receiver");
+            rollbackError = expected ? "SQLException: Simulated failure while crediting receiver"
+                    : e.getClass().getSimpleName() + ": " + e.getMessage();
         }
         try (Connection connection = DatabaseManager.getConnection(); Statement statement = connection.createStatement()) {
             statement.executeUpdate("DROP TRIGGER fail_receiver_update");
         }
-        check("TC37 Failure while crediting receiver raises an error", "SQLiteException", rollbackError);
+        check("TC37 Failure while crediting receiver raises an error",
+                "SQLException: Simulated failure while crediting receiver", rollbackError);
         check("TC38 ROLLBACK: sender balance restored after failed credit", senderBeforeRollback.toPlainString(),
                 accountService.getAccount("SB1001").getBalance().toPlainString());
         check("TC39 ROLLBACK: receiver balance unchanged", receiverBeforeRollback.toPlainString(),
@@ -326,6 +342,38 @@ public class BankSystemTestRunner {
                         && "Concurrency test".equals(transaction.getDescription()))
                 .count();
         check("TC58 All 100 concurrent deposits recorded", "100", String.valueOf(successfulConcurrent));
+
+        // ROW LOCK TEST: another connection locks SB1001 with SELECT ... FOR UPDATE and holds the lock
+        // for 800 ms. A deposit started meanwhile must WAIT for that lock, then succeed.
+        BigDecimal before = accountService.getAccount("SB1001").getBalance();
+        long waitedMillis;
+        try (Connection other = DatabaseManager.getConnection()) {
+            other.setAutoCommit(false);
+            try (Statement lock = other.createStatement()) {
+                lock.executeQuery("SELECT balance FROM accounts WHERE account_number = 'SB1001' FOR UPDATE").close();
+            }
+            long[] depositTime = new long[1];
+            Thread depositor = new Thread(() -> {
+                long startedAt = System.currentTimeMillis();
+                try {
+                    accountService.deposit("SB1001", new BigDecimal("1.00"), "Row lock test");
+                } catch (Exception e) {
+                    System.out.println("   deposit error: " + e.getMessage());
+                }
+                depositTime[0] = System.currentTimeMillis() - startedAt;
+            });
+            depositor.start();
+            Thread.sleep(800);
+            other.commit();          // releases the row lock
+            depositor.join();
+            waitedMillis = depositTime[0];
+        }
+        check("TC65 Deposit waits while another connection holds a FOR UPDATE row lock (>= 700 ms)", "true",
+                String.valueOf(waitedMillis >= 700));
+        check("TC66 Deposit completes correctly after the lock is released", before.add(new BigDecimal("1.00")).toPlainString(),
+                accountService.getAccount("SB1001").getBalance().toPlainString());
+        check("TC67 DATE column round-trip: new account opened today", java.time.LocalDate.now().toString(),
+                accountService.getAccount("SB2002").getCreationDate().toString());
     }
 
     /** The database itself must refuse bad data, even if Java code had a bug. */
@@ -367,6 +415,11 @@ public class BankSystemTestRunner {
             total = total.add(account.getBalance());
         }
         return total;
+    }
+
+    private static void skip(String name, String reason) {
+        skipped++;
+        System.out.println("SKIP  " + name + ": " + reason);
     }
 
     private static void check(String name, String expected, String actual) {

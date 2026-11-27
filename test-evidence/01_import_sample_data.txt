@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -30,7 +30,7 @@ Enter Your Choice:
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -51,7 +51,7 @@ Problems found            : 0
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -72,7 +72,7 @@ Problems found            : 0
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -139,4 +139,4 @@ Total records: 9
 
 ====================================================
 Enter Your Choice: 
-Thank you for using the Java National Bank Bank Management System. Goodbye!
+Thank you for banking with Java National Bank. Goodbye!

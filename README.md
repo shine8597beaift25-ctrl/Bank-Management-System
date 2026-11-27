@@ -1,6 +1,6 @@
 # Bank Management System
 
-A menu-driven **Core Java console application** that manages bank customers, savings and current accounts, deposits, withdrawals, transfers, transaction history and reports. Data is stored in an **SQLite** database through **JDBC**.
+A menu-driven **Core Java console application** that manages bank customers, savings and current accounts, deposits, withdrawals, transfers, transaction history and reports. Data is stored in a **MySQL** database through **JDBC**.
 
 > This is an educational banking simulation. It does not connect to any real bank, payment gateway or financial account.
 
@@ -11,17 +11,53 @@ A menu-driven **Core Java console application** that manages bank customers, sav
 | Item | Version | Notes |
 |---|---|---|
 | Java JDK | 11 or newer (tested on JDK 21) | `java -version` and `javac -version` must work in a terminal |
-| SQLite JDBC driver | 3.50.3.0 | **Already included** in `lib/sqlite-jdbc-3.50.3.0.jar` |
-| Maven (optional) | 3.6+ | Only if you prefer Maven. Not needed for the scripts below |
+| MySQL Community Server | **8.0.16 or newer** (tested on 8.0.46) | Older versions ignore the CHECK rules |
+| MySQL Connector/J (JDBC driver) | 8.x or 9.x (pom uses 9.4.0) | Maven downloads it for you, **or** copy the jar into `lib/` (step 3) |
+| Maven (optional) | 3.6+ | Only if you prefer Maven |
 | IDE (optional) | NetBeans, Eclipse or IntelliJ IDEA | Any of them works |
-
-You do **not** need to install SQLite separately. The driver jar contains SQLite itself, and the database file is created automatically.
 
 ---
 
-## 2. Quick start (terminal, no Maven needed)
+## 2. Set up MySQL (one time)
 
-Open a terminal **inside the `BankManagementSystem` folder** (the program reads `data/` and `src/main/resources/` relative to this folder).
+1. Install **MySQL Community Server 8** from https://dev.mysql.com/downloads/mysql/ (on Windows, the *MySQL Installer* is easiest). During installation you choose a password for the `root` user – remember it.
+2. Make sure the MySQL server is running (Windows: *Services > MySQL80*; Linux: `sudo service mysql start`).
+3. Open **`db.properties`** in the project folder and set your own values:
+
+```properties
+db.host=localhost
+db.port=3306
+db.name=bank_management
+db.user=root
+db.password=root        <-- change to YOUR MySQL password
+db.options=useSSL=false&allowPublicKeyRetrieval=true
+```
+
+That's all. You do **not** need to create the database or tables yourself: on first start the program runs `CREATE DATABASE IF NOT EXISTS bank_management` and creates the three tables from `src/main/resources/schema.sql`. Existing data is never wiped.
+
+> Prefer not to use `root`? Create a user in MySQL and put it in `db.properties`:
+> ```sql
+> CREATE USER 'bankuser'@'localhost' IDENTIFIED BY 'Bank@123';
+> GRANT ALL PRIVILEGES ON bank_management.* TO 'bankuser'@'localhost';
+> GRANT ALL PRIVILEGES ON bank_management_test.* TO 'bankuser'@'localhost';   -- only for the automated tests
+> ```
+> This user can create and use only those two databases. The automated tests run with it too, but the rollback test (TC37–TC40) is **skipped**, because creating a trigger needs extra rights when MySQL binary logging is on. Run the tests as `root` to include it.
+
+---
+
+## 3. Get the MySQL JDBC driver
+
+**With Maven:** nothing to do – `pom.xml` declares `com.mysql:mysql-connector-j:9.4.0` and Maven downloads it.
+
+**Without Maven (scripts or plain IDE project):**
+1. Go to https://dev.mysql.com/downloads/connector/j/ and choose **Platform Independent**.
+2. Download the ZIP, unzip it, and copy `mysql-connector-j-<version>.jar` into the project's **`lib/`** folder.
+
+---
+
+## 4. Build and run (terminal, no Maven needed)
+
+Open a terminal **inside the `BankManagementSystem` folder** (the program reads `db.properties` and `data/` from this folder).
 
 **Windows**
 ```bat
@@ -36,79 +72,64 @@ chmod +x *.sh      # first time only
 ./run.sh
 ```
 
-What the scripts do:
-- `build` compiles every `.java` file in `src/main/java` into the `out` folder, with the driver jar on the classpath.
-- `run` starts `main.Main` with `out` and `lib/*` on the classpath.
+On success the first line is:
+```
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
+```
 
 The same commands by hand:
 ```sh
-javac --release 11 -encoding UTF-8 -d out -cp "lib/*" $(find src/main/java -name "*.java")
+javac --release 11 -encoding UTF-8 -d out $(find src/main/java -name "*.java")
 cp src/main/resources/schema.sql out/
 java -cp "out:lib/*" main.Main          # on Windows use  "out;lib/*"
 ```
 
----
-
-## 3. Running with Maven (optional)
-
-The `pom.xml` declares the SQLite JDBC dependency and a runnable-jar build. With internet access:
-
+### With Maven
 ```sh
 mvn compile exec:java                 # compile and run
 mvn package                           # builds target/bank-management-system-jar-with-dependencies.jar
 java -jar target/bank-management-system-jar-with-dependencies.jar
 ```
+Run these from the project folder so the program finds `db.properties`.
 
-Run these from the project folder so the program finds the `data` folder.
-
-> Honest note: the build machine used to develop this project had no access to Maven Central, so the Maven build itself was **not** run there. The project was compiled and tested with `javac` and the same driver jar (see `TEST_CASES.md`). The `pom.xml` is standard and well-formed; if Maven reports a problem on your machine, use the scripts in section 2.
-
----
-
-## 4. Opening in an IDE
-
-**NetBeans**
-1. *File > Open Project* and pick the `BankManagementSystem` folder. NetBeans recognises it as a Maven project.
-2. Right-click the project > *Run*. (Main class: `main.Main`.)
-3. Without internet for Maven: create a normal Java project instead, set `src/main/java` as the source folder, add `src/main/resources` as a source/resource folder, and add `lib/sqlite-jdbc-3.50.3.0.jar` under *Libraries*.
-
-**Eclipse**
-1. *File > Import > Maven > Existing Maven Projects*, choose the folder, *Finish*.
-2. Right-click `Main.java` > *Run As > Java Application*.
-3. Without Maven: *File > New > Java Project* (uncheck "use default location", point to this folder), then *Build Path > Add External Archives* > `lib/sqlite-jdbc-3.50.3.0.jar`.
-4. Make sure the run configuration's **working directory** is the project folder (this is the default).
-
-**IntelliJ IDEA**
-1. *File > Open* the folder (or the `pom.xml`). Run `main.Main`.
+> Honest note: the machine used to develop this project could not reach Maven Central, so the Maven build itself was **not** run there. The project was compiled with `javac` and tested against a real MySQL 8.0.46 server (see `TEST_CASES.md`).
 
 ---
 
-## 5. Database configuration
+## 5. Opening in an IDE
 
-| Setting | Value |
-|---|---|
-| Database file | `data/bank_management.db` |
-| JDBC URL | `jdbc:sqlite:data/bank_management.db` |
-| Driver class | `org.sqlite.JDBC` |
-| Schema | `src/main/resources/schema.sql` (tables `customers`, `accounts`, `transactions`) |
-| Foreign keys | Turned on for every connection (`foreign_keys=true`) |
+**NetBeans** – *File > Open Project*, pick the folder (it is a Maven project), then *Run*. Main class: `main.Main`.
 
-- On first start the program creates the `data` folder and all tables automatically (`CREATE TABLE IF NOT EXISTS`). Existing data is never wiped.
-- To start with an empty bank, close the program and delete `data/bank_management.db`.
-- To use a different database file: `java -Dbank.db.path=data/other.db -cp "out:lib/*" main.Main`
-- Money values are stored as exact text (for example `1500.00`) and handled in Java as `BigDecimal`. See `PROJECT_DOCUMENTATION.md` section 11 for why.
+**Eclipse** – *File > Import > Maven > Existing Maven Projects*, then run `Main.java` as a Java Application. Without Maven: create a Java project on this folder, set `src/main/java` (and `src/main/resources`) as source folders, and add the Connector/J jar via *Build Path > Add External Archives*.
 
-### Included data
+**IntelliJ IDEA** – *File > Open* the folder or `pom.xml`, then run `main.Main`.
 
-The delivered `data/bank_management.db` already contains sample data: 8 customers, 9 accounts (one closed) and 13 transactions, including one transfer and one refused withdrawal. The same data is exported in `data/customers.csv`, `data/accounts.csv` and `data/transactions.csv`.
-
-`data/sample/` holds files for testing CSV import:
-- `customers_sample.csv`, `accounts_sample.csv` – clean sample data
-- `customers_invalid.csv`, `accounts_invalid.csv` – files with deliberate mistakes, to show validation
+In every IDE the **working directory** must be the project folder (the default), so `db.properties` is found.
 
 ---
 
-## 6. Using the program
+## 6. Sample data
+
+The MySQL database starts empty. Load the sample data in one of two ways:
+
+**Option A – from the program (shows CSV import):**
+menu **12 > 4** with `data/sample/customers_sample.csv`, then **12 > 5** with `data/sample/accounts_sample.csv`.
+
+**Option B – ready-made SQL script (8 customers, 9 accounts, 13 transactions):**
+```sh
+mysql -u root -p < data/sample/sample_database.sql
+```
+⚠️ This deletes any existing `bank_management` database first.
+
+Other files:
+- `data/customers.csv`, `data/accounts.csv`, `data/transactions.csv` – export of the sample data
+- `data/sample/customers_invalid.csv`, `accounts_invalid.csv` – files with deliberate mistakes, to show validation
+- `data/backup/*.sql` – example output of the backup feature (menu 12 > 6)
+- `data/reports/*.txt` – example saved report (menu 10 > 7)
+
+---
+
+## 7. Using the program
 
 ```
 ====================================================
@@ -133,12 +154,20 @@ The delivered `data/bank_management.db` already contains sample data: 8 customer
 ====================================================
 ```
 
-Try these with the included data:
+Try these with the sample data:
 - **8** then `SB1006` – balance inquiry with estimated interest.
 - **7** then `SB1001`, `CA1005`, `500`, `y` – a transfer. Then **9 > 8** with the printed reference ID shows both sides.
 - **6** then `SB1007`, `5000` – refused withdrawal (insufficient balance), saved as FAILED.
 - **10 > 1** – bank summary report.
+- **12 > 6** – back up the whole database to an `.sql` file.
 - **14 > 5** then `SB1006`, `y` – two producer and two consumer threads working on one account at the same time.
+
+You can also look at the data directly in MySQL Workbench or the `mysql` client:
+```sql
+USE bank_management;
+SELECT * FROM accounts;
+SELECT * FROM transactions ORDER BY transaction_id DESC LIMIT 10;
+```
 
 Bank rules used by the simulation:
 
@@ -154,25 +183,26 @@ Other rules: one **active** account of each type per customer; an account can be
 
 ---
 
-## 7. Running the automated tests
+## 8. Running the automated tests
 
 ```sh
 ./run-tests.sh        # Windows: run-tests.bat
 ```
 
-This compiles the program and `src/test/java/test/BankSystemTestRunner.java`, then runs 64 checks against a **separate** database (`data/test_bank.db`) so your real data is not touched. Expected last line: `=== RESULT: 64 passed, 0 failed ===`.
+This compiles the program and `src/test/java/test/BankSystemTestRunner.java`, then runs 67 checks against a **separate** database, `bank_management_test`, which it deletes and re-creates each time. Your real `bank_management` data is not touched. The MySQL user needs permission to create/drop that database and to create a trigger (the `root` user can). Expected last line: `=== RESULT: 67 passed, 0 failed ===`. With a limited user the rollback test is skipped and you will see `63 passed, 0 failed, 1 skipped`.
 
 ---
 
-## 8. Folder structure
+## 9. Folder structure
 
 ```
 BankManagementSystem/
-├── pom.xml                      Maven build file (SQLite JDBC dependency)
+├── pom.xml                      Maven build file (MySQL Connector/J dependency)
+├── db.properties                MySQL host, port, database, user, password
 ├── build.sh / build.bat         Compile without Maven
 ├── run.sh / run.bat             Run without Maven
 ├── run-tests.sh / .bat          Run the automated tests
-├── lib/sqlite-jdbc-3.50.3.0.jar SQLite JDBC driver
+├── lib/                         Put mysql-connector-j-*.jar here (non-Maven builds)
 ├── src/main/java/
 │   ├── main/            Main.java (menus)
 │   ├── model/           Person, Customer, BankAccount, SavingsAccount, CurrentAccount, Transaction + enums
@@ -185,21 +215,25 @@ BankManagementSystem/
 │   ├── exceptions/      5 required custom exceptions + DuplicateCustomerException
 │   ├── interfaces/      Displayable, TransactionOperations
 │   └── util/            ConsoleUtil, InputHelper, ValidationUtil
-├── src/main/resources/schema.sql
+├── src/main/resources/schema.sql   MySQL tables, constraints and indexes
 ├── src/test/java/test/BankSystemTestRunner.java
-├── data/                Database, CSV files, reports, backups, sample files
+├── data/                CSV files, sample SQL script, reports, backups
 ├── test-evidence/       Saved console output of every test run
 ├── README.md  PROJECT_DOCUMENTATION.md  TEST_CASES.md  PROGRESS.md  VIVA_QUESTIONS.md
 ```
 
 ---
 
-## 9. Troubleshooting
+## 10. Troubleshooting
 
-| Problem | Fix |
+| Message | Fix |
 |---|---|
-| `SQLite JDBC driver not found` | The jar is not on the classpath. Use the scripts, or add `lib/sqlite-jdbc-3.50.3.0.jar` to your IDE's libraries. |
+| `MySQL JDBC driver not found` / `No suitable driver` | The Connector/J jar is not on the classpath. Copy it into `lib/` (step 3) or use Maven. |
+| `Access denied for user 'root'@'localhost'` | Wrong user name or password in `db.properties`. |
+| `Communications link failure` / `Connection refused` | The MySQL server is not running, or `db.host` / `db.port` is wrong. |
+| `Public Key Retrieval is not allowed` | Keep `allowPublicKeyRetrieval=true` in `db.options`. |
+| `Access denied ... to database 'bank_management'` | Your MySQL user has no rights on that database. Grant them as root (step 2). |
+| Negative balances not refused when typed directly in SQL | Your MySQL is older than 8.0.16 and ignores CHECK rules. Upgrade to MySQL 8. |
 | `schema.sql not found` | Run the program from the project folder, or copy `schema.sql` into your output folder (the build scripts do this). |
 | `javac: invalid flag: --release` | Your JDK is version 8. Install JDK 11 or newer. |
 | `Rs.` instead of a rupee sign | Intentional: the plain text works in every Windows console. |
-| `[SQLITE_BUSY] database is locked` | Another program (for example a DB browser) has the file open for writing. Close it. |

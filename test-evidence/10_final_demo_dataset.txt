@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -30,7 +30,7 @@ Enter Your Choice:
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -51,7 +51,7 @@ Problems found            : 0
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -72,7 +72,7 @@ Problems found            : 0
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -160,7 +160,7 @@ Enter Your Choice:
 ----------------------------------------------------
 Sender account number  :    -> Vikram Singh | Savings | Balance Rs. 315,000.75 | ACTIVE
 Receiver account number:    -> Priya Nair | Savings | Balance Rs. 48,250.50 | ACTIVE
-Transfer amount: Transfer Rs. 10,000.00 from SB1006 to SB1003? (y/n): [SUCCESS] Transfer completed. Reference ID: TRF-20261120230709-012
+Transfer amount: Transfer Rs. 10,000.00 from SB1006 to SB1003? (y/n): [SUCCESS] Transfer completed. Reference ID: TRF-20261127235418-012
 Sender   SB1006 new balance: Rs. 305,000.75
 Receiver SB1003 new balance: Rs. 58,250.50
 
@@ -223,7 +223,7 @@ Enter Your Choice:
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -237,7 +237,7 @@ Enter Your Choice: File to write [data/customers.csv]: [SUCCESS] 8 customer(s) e
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -251,7 +251,7 @@ Enter Your Choice: File to write [data/accounts.csv]: [SUCCESS] 9 account(s) exp
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -265,11 +265,12 @@ Enter Your Choice: File to write [data/transactions.csv]: [SUCCESS] 13 transacti
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
-Enter Your Choice: [SUCCESS] Database backed up to data/backup/bank_management_20261120_230709.db (49,152 bytes copied).
+Enter Your Choice: [SUCCESS] Backup saved to data/backup/bank_backup_20261127_235418.sql: 8 customers, 9 accounts, 13 transactions.
+Bytes written (FileOutputStream): 6,675 | bytes read back (FileInputStream): 6,675 - backup verified.
 
 ====================================================
                 IMPORT / EXPORT CSV
@@ -279,7 +280,7 @@ Enter Your Choice: [SUCCESS] Database backed up to data/backup/bank_management_2
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -320,7 +321,7 @@ Enter Your Choice:
 ====================================================
 Enter Your Choice: ============================================================
             Java National Bank - BANKING REPORT
-               Generated: 2026-11-20 23:07:09
+               Generated: 2026-11-27 23:54:18
 ============================================================
 Total registered customers               : 8
 Total accounts (active + closed)         : 9
@@ -353,7 +354,7 @@ CUSTOMERS (ALPHABETICAL)
 - Sneha Reddy               C1004
 - Vikram Singh              C1005
 
-[SUCCESS] Report saved to data/reports/bank_report_20261120_230709.txt
+[SUCCESS] Report saved to data/reports/bank_report_20261127_235418.txt
 
 ====================================================
                   BANKING REPORTS

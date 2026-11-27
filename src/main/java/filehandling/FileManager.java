@@ -34,7 +34,7 @@ import java.util.function.Function;
  *
  *  CHARACTER streams (text): FileWriter / FileReader (wrapped in BufferedWriter / BufferedReader)
  *                            for CSV export and import and for saving text reports.
- *  BYTE streams (raw bytes): FileInputStream / FileOutputStream to back up the database file.
+ *  BYTE streams (raw bytes): FileOutputStream writes the SQL backup file, FileInputStream reads it back to check it.
  *  StreamTokenizer          : splits a file into words, numbers and quoted text.
  *
  * Every stream is opened in try-with-resources, so it is closed even if an error happens.
@@ -215,23 +215,76 @@ public class FileManager {
     }
 
     // =====================================================================
-    // BYTE STREAMS: database backup
+    // BYTE STREAMS: database backup to an .sql file
     // =====================================================================
 
-    /** Copies the database file byte by byte into a backup file. Returns the number of bytes copied. */
-    public long copyFile(String sourcePath, String targetPath) throws IOException {
-        createParentFolder(targetPath);
+    /**
+     * Writes every customer, account and transaction as SQL INSERT statements.
+     * The text is turned into bytes (UTF-8) and written with a FileOutputStream (byte stream).
+     * The file can be loaded back into an empty database with:
+     *     mysql -u root -p bank_management < backup-file.sql
+     *
+     * @return the number of bytes written
+     */
+    public long writeSqlBackup(String filePath, String databaseName, List<Customer> customers,
+                               List<BankAccount> accounts, List<Transaction> transactions) throws IOException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("-- Bank Management System backup of database ").append(databaseName).append('\n');
+        sql.append("-- Created: ").append(java.time.LocalDateTime.now().format(Transaction.DATE_TIME_FORMAT)).append('\n');
+        sql.append("-- Restore into an EMPTY database: mysql -u root -p ").append(databaseName)
+                .append(" < this-file.sql").append("\n\n");
+
+        for (Customer customer : customers) {
+            sql.append("INSERT INTO customers (customer_id, name, age, email, phone, address) VALUES (")
+                    .append(sqlText(customer.getCustomerId())).append(", ").append(sqlText(customer.getName())).append(", ")
+                    .append(customer.getAge()).append(", ").append(sqlText(customer.getEmail())).append(", ")
+                    .append(sqlText(customer.getPhone())).append(", ").append(sqlText(customer.getAddress())).append(");\n");
+        }
+        for (BankAccount account : accounts) {
+            sql.append("INSERT INTO accounts (account_number, customer_id, account_type, balance, account_status, creation_date) VALUES (")
+                    .append(sqlText(account.getAccountNumber())).append(", ").append(sqlText(account.getCustomerId())).append(", ")
+                    .append(sqlText(account.getAccountType().name())).append(", ").append(account.getBalance().toPlainString())
+                    .append(", ").append(sqlText(account.getStatus().name())).append(", ")
+                    .append(sqlText(account.getCreationDate().toString())).append(");\n");
+        }
+        for (Transaction transaction : transactions) {
+            sql.append("INSERT INTO transactions (transaction_id, account_number, transaction_type, amount, transaction_date, "
+                    + "description, status, reference_id) VALUES (")
+                    .append(transaction.getTransactionId()).append(", ").append(sqlText(transaction.getAccountNumber())).append(", ")
+                    .append(sqlText(transaction.getType().name())).append(", ").append(transaction.getAmount().toPlainString())
+                    .append(", ").append(sqlText(transaction.getTransactionDate().format(Transaction.DATE_TIME_FORMAT)))
+                    .append(", ").append(sqlText(transaction.getDescription())).append(", ")
+                    .append(sqlText(transaction.getStatus().name())).append(", ")
+                    .append(sqlText(transaction.getReferenceId())).append(");\n");
+        }
+
+        createParentFolder(filePath);
+        byte[] bytes = sql.toString().getBytes(StandardCharsets.UTF_8);   // characters -> bytes
+        try (FileOutputStream output = new FileOutputStream(filePath)) {
+            output.write(bytes);
+        }
+        return bytes.length;
+    }
+
+    /** Reads a file byte by byte with a FileInputStream and returns its size (used to verify a backup). */
+    public long countBytes(String filePath) throws IOException {
         long totalBytes = 0;
         byte[] buffer = new byte[4096];
-        try (FileInputStream input = new FileInputStream(sourcePath);
-             FileOutputStream output = new FileOutputStream(targetPath)) {
+        try (FileInputStream input = new FileInputStream(filePath)) {
             int bytesRead;
             while ((bytesRead = input.read(buffer)) != -1) {   // -1 means end of file
-                output.write(buffer, 0, bytesRead);
                 totalBytes += bytesRead;
             }
         }
         return totalBytes;
+    }
+
+    /** Puts text in single quotes for SQL, doubling any quote inside it: O'Neil -> 'O''Neil'. */
+    private static String sqlText(String value) {
+        if (value == null) {
+            return "NULL";
+        }
+        return "'" + value.replace("\\", "\\\\").replace("'", "''") + "'";
     }
 
     // =====================================================================

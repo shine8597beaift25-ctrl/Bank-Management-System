@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -62,7 +62,7 @@ Customer ID      : C1007
 Account Holder   : Karan Patel
 Balance          : Rs. 2,000.00
 Status           : ACTIVE
-Opened On        : 2026-11-20
+Opened On        : 2026-11-27
 Withdrawal Limit : Rs. 50,000.00
 Interest Rate    : 4.00% per year
 Yearly Interest  : Rs. 80.00 (estimated)
@@ -107,7 +107,7 @@ Customer ID      : C1002
 Account Holder   : Priya Nair
 Balance          : Rs. 5,000.00
 Status           : ACTIVE
-Opened On        : 2026-11-20
+Opened On        : 2026-11-27
 Withdrawal Limit : Rs. 200,000.00
 Interest Rate    : Not applicable (current account)
 Overdraft        : Not allowed
@@ -139,7 +139,7 @@ Customer ID      : C1002
 Account Holder   : Priya Nair
 Balance          : Rs. 5,000.00
 Status           : ACTIVE
-Opened On        : 2026-11-20
+Opened On        : 2026-11-27
 Withdrawal Limit : Rs. 200,000.00
 Interest Rate    : Not applicable (current account)
 Overdraft        : Not allowed
@@ -186,14 +186,14 @@ Enter Your Choice:
 | CA1002     | C1001       | Aarav Sharma | Current | Rs. 150,000.00 | ACTIVE | 2026-01-12 |
 | CA1005     | C1004       | Sneha Reddy  | Current | Rs. 92,000.00  | ACTIVE | 2026-03-05 |
 | CA1008     | C1007       | Karan Patel  | Current | Rs. 64,000.00  | ACTIVE | 2026-05-30 |
-| CA1011     | C1002       | Priya Nair   | Current | Rs. 5,000.00   | ACTIVE | 2026-11-20 |
+| CA1011     | C1002       | Priya Nair   | Current | Rs. 5,000.00   | ACTIVE | 2026-11-27 |
 | SB1001     | C1001       | Aarav Sharma | Savings | Rs. 25,000.00  | ACTIVE | 2026-01-10 |
 | SB1003     | C1002       | Priya Nair   | Savings | Rs. 48,250.50  | ACTIVE | 2026-02-03 |
 | SB1004     | C1003       | Rohan Mehta  | Savings | Rs. 7,800.00   | ACTIVE | 2026-02-20 |
 | SB1006     | C1005       | Vikram Singh | Savings | Rs. 315,000.75 | ACTIVE | 2026-03-18 |
 | SB1007     | C1006       | Ananya Iyer  | Savings | Rs. 1,200.00   | ACTIVE | 2026-04-22 |
 | SB1009     | C1008       | Fatima Khan  | Savings | Rs. 0.00       | CLOSED | 2026-06-14 |
-| SB1010     | C1007       | Karan Patel  | Savings | Rs. 2,000.00   | ACTIVE | 2026-11-20 |
+| SB1010     | C1007       | Karan Patel  | Savings | Rs. 2,000.00   | ACTIVE | 2026-11-27 |
 +------------+-------------+--------------+---------+----------------+--------+------------+
 Total records: 11
 
@@ -324,7 +324,7 @@ Enter Your Choice:
                    Deposit Money
 ----------------------------------------------------
 Account number:    -> Fatima Khan | Savings | Balance Rs. 0.00 | CLOSED
-Deposit amount: [ERROR] Account SB1009 is closed. No transactions allowed.
+[ERROR] Account SB1009 is closed. No transactions allowed.
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -438,7 +438,7 @@ Enter Your Choice:
 ----------------------------------------------------
 Sender account number  :    -> Aarav Sharma | Savings | Balance Rs. 25,000.00 | ACTIVE
 Receiver account number:    -> Sneha Reddy | Current | Balance Rs. 92,000.00 | ACTIVE
-Transfer amount: Transfer Rs. 5,000.00 from SB1001 to CA1005? (y/n): [SUCCESS] Transfer completed. Reference ID: TRF-20261120230512-008
+Transfer amount: Transfer Rs. 5,000.00 from SB1001 to CA1005? (y/n): [SUCCESS] Transfer completed. Reference ID: TRF-20261127235328-007
 Sender   SB1001 new balance: Rs. 20,000.00
 Receiver CA1005 new balance: Rs. 97,000.00
 
@@ -528,8 +528,7 @@ Enter Your Choice:
 ----------------------------------------------------
 Sender account number  :    -> Aarav Sharma | Savings | Balance Rs. 20,000.00 | ACTIVE
 Receiver account number:    -> Fatima Khan | Savings | Balance Rs. 0.00 | CLOSED
-Transfer amount: Transfer Rs. 100.00 from SB1001 to SB1009? (y/n): [ERROR] Transfer refused: Receiver account SB1009 is closed.
-[INFO] No money was moved.
+[ERROR] Account SB1009 is closed. No transactions allowed.
 
 ====================================================
                BANK MANAGEMENT SYSTEM

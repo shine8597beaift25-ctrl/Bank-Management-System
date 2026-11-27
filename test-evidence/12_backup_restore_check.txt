@@ -1,0 +1,9 @@
+Restore check of data/backup/bank_backup_20261127_235339.sql into a new empty database (MySQL 8.0.46), run on 2026-11-27
+Commands: CREATE DATABASE bank_restore_check; mysql bank_restore_check < schema.sql; mysql bank_restore_check < backup.sql
+Rows restored (customers, accounts, transactions) and total balance:
++-----------+----------+--------------+---------------+
+| customers | accounts | transactions | total_balance |
++-----------+----------+--------------+---------------+
+|         9 |       12 |           17 |     716951.75 |
++-----------+----------+--------------+---------------+
+The backup message reported: 9 customers, 12 accounts, 17 transactions - matches.

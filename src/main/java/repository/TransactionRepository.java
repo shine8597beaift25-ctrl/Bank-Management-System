@@ -5,7 +5,6 @@ import model.Transaction;
 import model.TransactionStatus;
 import model.TransactionType;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,14 +52,14 @@ public class TransactionRepository implements DataRepository<Transaction, Intege
         try (PreparedStatement statement = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, transaction.getAccountNumber());
             statement.setString(2, transaction.getType().name());
-            statement.setString(3, transaction.getAmount().toPlainString());
-            statement.setString(4, transaction.getTransactionDate().format(Transaction.DATE_TIME_FORMAT));
+            statement.setBigDecimal(3, transaction.getAmount());
+            statement.setObject(4, transaction.getTransactionDate());   // LocalDateTime -> DATETIME
             statement.setString(5, transaction.getDescription());
             statement.setString(6, transaction.getStatus().name());
             statement.setString(7, transaction.getReferenceId());
             statement.executeUpdate();
 
-            // Read the ID that SQLite created (AUTOINCREMENT) and store it in the object
+            // Read the ID that MySQL created (AUTO_INCREMENT) and store it in the object
             try (ResultSet keys = statement.getGeneratedKeys()) {
                 if (keys.next()) {
                     transaction.setTransactionId(keys.getInt(1));
@@ -138,8 +137,8 @@ public class TransactionRepository implements DataRepository<Transaction, Intege
                 resultSet.getInt("transaction_id"),
                 resultSet.getString("account_number"),
                 TransactionType.valueOf(resultSet.getString("transaction_type")),
-                new BigDecimal(resultSet.getString("amount")),
-                LocalDateTime.parse(resultSet.getString("transaction_date"), Transaction.DATE_TIME_FORMAT),
+                resultSet.getBigDecimal("amount"),
+                resultSet.getObject("transaction_date", LocalDateTime.class),
                 resultSet.getString("description"),
                 TransactionStatus.valueOf(resultSet.getString("status")),
                 resultSet.getString("reference_id"));

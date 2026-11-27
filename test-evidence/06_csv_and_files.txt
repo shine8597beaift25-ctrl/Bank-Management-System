@@ -1,4 +1,4 @@
-[INFO] Connected to database: data/bank_management.db
+[INFO] Connected to MySQL database bank_management on localhost:3306 (user root)
 
 ====================================================
                BANK MANAGEMENT SYSTEM
@@ -30,7 +30,7 @@ Enter Your Choice:
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -44,7 +44,7 @@ Enter Your Choice: File to write [data/customers.csv]: [SUCCESS] 8 customer(s) e
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -58,7 +58,7 @@ Enter Your Choice: File to write [data/accounts.csv]: [SUCCESS] 11 account(s) ex
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -72,7 +72,7 @@ Enter Your Choice: File to write [data/transactions.csv]: [SUCCESS] 16 transacti
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -100,7 +100,7 @@ Problems found            : 7
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -129,7 +129,7 @@ Problems found            : 8
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -143,7 +143,7 @@ Enter Your Choice: File to import [data/customers.csv]: [ERROR] File error: File
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -157,11 +157,12 @@ Enter Your Choice: File to import [data/customers.csv]: [ERROR] File error: Wron
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
-Enter Your Choice: [SUCCESS] Database backed up to data/backup/bank_management_20261120_230546.db (49,152 bytes copied).
+Enter Your Choice: [SUCCESS] Backup saved to data/backup/bank_backup_20261127_235339.sql: 9 customers, 12 accounts, 17 transactions.
+Bytes written (FileOutputStream): 8,462 | bytes read back (FileInputStream): 8,462 - backup verified.
 
 ====================================================
                 IMPORT / EXPORT CSV
@@ -171,7 +172,7 @@ Enter Your Choice: [SUCCESS] Database backed up to data/backup/bank_management_2
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -192,7 +193,7 @@ Quoted values   : 0
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
@@ -213,7 +214,7 @@ Quoted values   : 8
 3. Export Transactions
 4. Import Customers
 5. Import Accounts
-6. Backup Database File (byte streams)
+6. Back Up Database to an SQL File (byte streams)
 7. Analyse a CSV File (StreamTokenizer)
 8. Return to Main Menu
 ====================================================
